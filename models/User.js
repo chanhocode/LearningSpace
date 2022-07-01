@@ -1,4 +1,5 @@
-const mongoose = requier('mongoose');
+const mongoose = require('mongoose');
+
 
 const userSchema = mongoose.Schema({
   name: {
@@ -8,7 +9,7 @@ const userSchema = mongoose.Schema({
   email: {
     type: String,
     trim: true,
-    unique: 1
+    unique: 1,
   },
   password: {
     type: String,
@@ -16,21 +17,21 @@ const userSchema = mongoose.Schema({
   },
   lastname: {
     type: String,
-    maxlength: 50;
+    maxlength: 50,
   },
   role: {
     type: Number,
-    default: 0
+    default: 0,
   },
   image: String,
   token: {
-    type: String
+    type: String,
   },
   tokenExp: {
-    type: Number
-  }
-})
+    type: Number,
+  },
+});
 
-const User = mongoose.moder('user', userSchema);
+const User = mongoose.model("user", userSchema)
 
-module.exports = { User };
+module.exports = { User }
