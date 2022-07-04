@@ -9,6 +9,16 @@ const config = require("./config/key");
 const { auth } = require("./middleware/auth");
 const { User } = require("./models/User");
 
+//test
+const cors = require("cors");
+app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
+//test
+
 app.use(cookieParser());
 
 app.use(express.urlencoded({ extended: true }));
@@ -22,17 +32,18 @@ mongoose
 
 app.get("/", (req, res) => res.send("Hello World!! _  안녕하세요~"));
 
-app.get('/api/hello', (req,res)=>{
-  res.send("안녕하세요test")
-})
+app.get("/api/hello", (req, res) => {
+  res.send("안녕하세요test");
+});
 
 app.post("/api/users/register", (req, res) => {
+  console.log(req.body)
+
   const user = new User(req.body);
   user.save((err, userInfo) => {
     if (err) return res.json({ success: false, err });
-    console.log("test");
     return res.status(200).json({
-      sucess: true,
+      success: true
     });
   });
 });
@@ -42,14 +53,14 @@ app.post("/api/users/login", (req, res) => {
     if (!user) {
       return res.json({
         loginSuccess: false,
-        message: "Unvalid email",
+        message: "제공된 이메일에 해당하는 유저가 없습니다.",
       });
     }
     user.comparePassword(req.body.password, (err, isMatch) => {
       if (!isMatch)
         return res.json({
-          loginSuccess: falsse,
-          message: "Wrong password",
+          loginSuccess: false,
+          message: "잘못된 비밀번호 입니다."
         });
       user.generateToken((err, user) => {
         if (err) return res.status(400).send(err);

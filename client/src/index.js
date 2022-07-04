@@ -4,8 +4,8 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-import { Provider } from "react";
-import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
+import { Provider } from "react-redux";
+import "antd/dist/antd.min.css"; // or 'antd/dist/antd.less'
 
 import { applyMiddleware, legacy_createStore as createStore } from "redux";
 import promiseMiddleware from "redux-promise";

@@ -5,7 +5,6 @@ let auth = (req,res,next) => {
 
   // 클라이언트 쿠키에서 토큰 가져오기
   let token = req.cookies.x_auth
-
   // 토큰 복호화후 유저 찾기
   User.findByToken(token, (err, user) => {
     if(err) throw err;
