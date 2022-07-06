@@ -8,7 +8,7 @@ import Auth from "./../../../hoc/auth";
 function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // comment:: 서버에 보내고자 하는 값은 state에 저장됨
+
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
 
@@ -18,10 +18,6 @@ function LoginPage() {
   const onPasswordHandler = (event) => {
     setPassword(event.currentTarget.value);
   };
-
-  _auth(false);
-
-
   const onSubmitHandler = (event) => {
     event.preventDefault();
 
@@ -38,9 +34,11 @@ function LoginPage() {
       }
     });
   };
+  _auth(false);
 
   return (
     <div
+      className="LoginPage"
       style={{
         display: "flex",
         justifyContent: "center",

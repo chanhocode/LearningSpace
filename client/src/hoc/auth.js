@@ -2,7 +2,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../_actions/user_action";
 
-// comment:: 최적화 필요(진행중)
 export default function _auth(option, adminRoute = null) {
   //null => 모두 사용 가능한 페이지
   //true => 로그인한 유저만 출입이 가능한 페이지
