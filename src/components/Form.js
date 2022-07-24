@@ -2,7 +2,6 @@ import React from "react";
 
 const Form = ({ value, setValue, handleSubmit }) => {
   const handleChnage = (e) => {
-    console.log("e", e.target.value);
     setValue(e.target.value);
   };
   return (
