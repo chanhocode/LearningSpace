@@ -42,3 +42,5 @@ function queens(n) {
 // test
 queens(8);
 if (queens(0) == true) console.log('Success');
+
+console.log('SCH 20201693 조찬호')
