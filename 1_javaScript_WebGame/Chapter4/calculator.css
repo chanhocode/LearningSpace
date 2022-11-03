@@ -1,0 +1,120 @@
+/* 기본 프레임 */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0px;
+  background-color: #2a9d8f;
+}
+.webFrame {
+  max-width: 530px;
+  width: 70vw;
+  aspect-ratio: 12/16;
+  background-color: #000;
+  border-radius: 40px;
+  border: 25px solid #000;
+}
+.display {
+  width: 100%;
+  height: 92%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  overflow: scroll;
+  background-color: #8d72e1;
+  padding-left: 1vw;
+  padding-right: 1vw;
+
+  box-sizing: border-box;
+
+  background-image: url(../util/jsBackground.jpg);
+  background-size: cover;
+}
+.notch {
+  width: 60%;
+  height: 6%;
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: #000;
+}
+
+nav {
+  height: 8%;
+  background-color: #fff;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+nav img {
+  width: 12%;
+  margin-left: auto;
+  margin-right: auto;
+  aspect-ratio: 1/1;
+}
+.name {
+  display: block;
+  text-align: right;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+.name a {
+  text-decoration: none;
+  color: #000;
+}
+/*End 기본프레임*/
+.contentWrapper {
+  width: 100%;
+  height: 92%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.content {
+  background-color: #b9e0ff;
+  width: 256px;
+  padding: 20px;
+  border-radius: 15px;
+}
+.content img {
+  width: 40%;
+  display: block;
+}
+#result {
+  box-sizing: border-box;
+  border: none;
+  border-bottom: #000 solid 2px;
+  width: 180px;
+  height: 50px;
+  margin: 5px;
+  text-align: right;
+}
+#operator {
+  box-sizing: border-box;
+
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  text-align: center;
+}
+button {
+  box-sizing: border-box;
+  background-color: #6c4ab6;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 700;
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+}
