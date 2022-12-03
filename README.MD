@@ -49,3 +49,54 @@
     6. npm whoami: 현재 사용가자 누구인지를 알려준다.
     7. npm logout: 로그인한 계정을 로그아웃
     8. npm version 버전: package.json의 버전을 올림
+
+4.learn-express
+  - node 프레임워크 _ 코드 관리 용이
+  - nodemon: 파일 변경시 재시작 하여 반영해줌
+  - sendFile: express로 html서빙하기
+  - '*' 애스터리스크를 이용해 모든 요청 처리 가능
+    // get에 대한 모든 요청 처리 가능
+    ```
+    app.get('*', {req, res}=>{
+      res.send('hello express');
+    })
+    ```
+  - MiddleWare: 공통되는 코드를 처리하여 중복 코드를 제거
+    1. 미들웨어는 next()를 사용해야 다음 으로 넘어 갈 수 있다.
+    2. 미들웨어 특성
+      - 주소를 직접 정의해 줄 수 있다.
+      - 여러 미들웨어를 연달아 사용 할 수 있다.
+      ```
+      app.use((req, res, next)=>{
+        /// meddleware1
+        next();
+      }, (req, res, next)=>{
+        /// meddleware2
+        next();
+      })
+      ```
+    3. 에러 미들웨어 생성
+    - 반드시 4개의 모든 인자가 들어 있어야 한다.
+     ```
+      app.use((err, req, res, next)=>{
+        console.error(err);
+        res.send('에러발생');
+      })
+     ```
+    4. 404처리 가능: 다른 라우터보다는 아래 에러미들웨어 보다는 위에 두어서 처리가능
+  - 요청 한번에는 응답은 한번만 가능 ( 아래 코드에서는 응답을 세번을 하려 하고 있으므로 에러 발생 )
+    ```
+    app.get('/', (res, req)=>{
+      res.sendFile(path.join(__dirname, 'index.html'));
+      res.send('hello');
+      res.json({hello});
+    })
+    ```
+  - morgan: 클라이언트 요청을 서버에서 기록해주는 미들웨어
+    1. combined: 사용시 더 자세한 정보를 기록
+    2. 개발시에는 'dev'를 주로 사용
+  - cookieParser: 쿠키 생성 미들웨어
+  - static: 정적파일 제공 미들웨어 _ 요청경로와 실제경로가 다르게 할 수 있어 보안 이점
+  - express-session: 요청마다 개인의 저장공간을 만들어주는 세션관리용 미들웨어
+  - multer: multipart/form-data인 경우 요청 본문을 해석하기 위해 사용하는 미들웨어
+  - dotenv: 환경변수를 관리 할 수 있는 라이브러리
