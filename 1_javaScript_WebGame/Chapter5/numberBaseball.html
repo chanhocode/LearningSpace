@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>numberBaseball @chanoho</title>
+    <link rel="stylesheet" href="./numberBaseball.css" />
+  </head>
+  <body>
+    <div>
+      <div class="webFrame">
+        <div class="display">
+          <div class="notch"></div>
+
+          <!--Start content-->
+          <form id="form">
+            <input type="text" id="input" />
+            <button>확인</button>
+          </form>
+          <div id="logs"></div>
+          <script>
+            const $input = document.querySelector('#input');
+            const $form = document.querySelector('#form');
+            const $logs = document.querySelector('#logs');
+            // 배열 초기화
+            const numbers = [];
+            for (let i = 0; i < 9; i++) {
+              numbers.push(i + 1);
+            }
+            // 랜덤 숫자 생성
+            const answer = [];
+            for (let i = 0; i < 4; i++) {
+              const index = Math.floor(Math.random() * numbers.length);
+              answer.push(numbers[index]);
+              numbers.splice(index, 1);
+            }
+
+            // 버튼 클릭 동작
+            /*
+              # form 접근 좀 더 알아보기
+                - event.targer[0] -> input 접근, event.targer[1] -> 버튼 접근
+                  이처럼, 배열로 form안의 객체에 접근이 가능하다.
+            */
+            const tries = []; // 시도 내역
+            function checkInput(input) {
+              if (input.length !== 4) {
+                return alert('4자리 숫자를 입력해 주세요.');
+              }
+              if (new Set(input).size !== 4) {
+                // Set을 이용해서 중복된 숫자를 제거 하고 중복이 있다면 4미만이므로 중복 확인
+                return alert('중복되지 않게 입력해 주세요.');
+              }
+              if (tries.includes(input)) {
+                return alert('이미 시도한 값입니다.');
+              }
+              return true;
+            } // 입력값 검사
+            $form.addEventListener('submit', (event) => {
+              event.preventDefault(); // 기본 동작 막기 _ form은 버튼을 누르면 페이지 새로고침 발생
+              const value = $input.value;
+              $input.value = '';
+              if (!checkInput(value)) {
+                return;
+              }
+              // join: 배열을 전달받은 인자로 연결하여 문자열로 변경
+              // +) split: 문자열을 전달받은 조건으로 나누어 배열로 만들어 준다.
+              if (answer.join('') === value) {
+                // 홈런 검사
+                $logs.innerHTML = $logs.textContent + '<br/>홈런!'; // 로그 추가 방법 (1)
+                return;
+              }
+              if (tries.length >= 9) {
+                // 기회 카운트 _ 시도를 10번 이상하면 패배
+                const message = document.createTextNode(
+                  `패배! 정답은 ${answer.join('')}`
+                );
+                $logs.appendChild(message); // 로그 추가 방법 (2)
+                return;
+              }
+              // 스트라이크 볼 검사
+              let strike = 0;
+              let ball = 0;
+              for (let i = 0; i < answer.length; i++) {
+                const index = value.indexOf(answer[i]);
+                if (index > -1) {
+                  if (index === i) {
+                    strike++;
+                  } else {
+                    ball++;
+                  }
+                }
+              }
+              $logs.append(
+                // 로그 추가 방법 (3)
+                `${value}: ${strike} 스트라이크! & ${ball} 볼!`,
+                document.createElement('br')
+              );
+              tries.push(value);
+            });
+          </script>
+          <!--End content-->
+        </div>
+        <nav>
+          <a href="./vanillaJS.html"><img src="../..//util/bottom1.png" /></a>
+          <a href="./vanillaJS.html"><img src="../../util/bottom2.png" /></a>
+          <a href="./vanillaJS.html"><img src="../../util/bottom3.png" /></a>
+        </nav>
+      </div>
+      <div class="name">
+        <a href="https://github.com/chanhocode">@chanho</a>
+      </div>
+    </div>
+  </body>
+</html>
