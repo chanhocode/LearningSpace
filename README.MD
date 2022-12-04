@@ -100,3 +100,24 @@
   - express-session: 요청마다 개인의 저장공간을 만들어주는 세션관리용 미들웨어
   - multer: multipart/form-data인 경우 요청 본문을 해석하기 위해 사용하는 미들웨어
   - dotenv: 환경변수를 관리 할 수 있는 라이브러리
+  - 템플릿 엔진: HTML의 정적인 단점을 개선 _ PHP, JSP 유사
+    1. 반복문, 조건문, 변수등을 사용할 수 있다.
+    2. 동적인 페이지 작성 가능
+  - Pug(구 Jade)
+    1. 익스프레스에서 app.set으로 퍼그 연결
+    ```
+    app.set('views', path.join(__dirname, 'views'));
+    app.set('view engine', 'pug');
+    ```
+    2. pug는 닫는 태그가 없다. (코드량이 감소)
+  - 넌적스 템플릿 엔진
+    1. 넌적스 연결
+    ```
+    app.set('vew engine', 'html');
+    nunjucks.configure('views', {
+      express: app,
+      watch: true,
+    })
+    ```
+    2. 넌적스는 HTML문법을 따른다.
+    
