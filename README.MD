@@ -1,7 +1,7 @@
 1.http_server
   - node 내장기능을 이용한 server 생성
   - http의 경우 도메인을 검색할때 뒤에 '80'을 생략 https의 경우 '443'을 생략이 가능하다.
-    - 하나의 도메인 안에서 포트번호를 이용해 여러개의 프로그램을 동시에 연결 할 수 있다. _ ( 다른 포트로 데이터 베이스나 다른 서버 동시에 연결 가능 )
+    - 하나의 도메인 안에서 포트번호를 이용해 여러개의 프로그램을 동시에 연결 할 수 있다. _ ( 다른 포트로 데이터 베이스나 다른 서버 동시에 연결 가능)
 
 2.REST_api
   - REST API(Representational State Transfer)
@@ -120,4 +120,44 @@
     })
     ```
     2. 넌적스는 HTML문법을 따른다.
-    
+
+5.MySQL_Sequelize
+  - 데이터베이스: 관련성을 가지며 중복이 없는 데이터들의 집합
+  - 정보 <-컬럼, 실제 데이터 <- 로우
+  - 컬럼 옵션
+    1. INT: 정수 자료형
+    2. VARCHAR: 문자열 자료형
+    3. TEXT: 긴 문자열 자료형
+    4. DATETIME: 날짜 자료형 저장
+    5. TINYINT: -128~127까지 저장, 주로 1 or 0만 저장해 불값 표현
+
+    6. NOT NULL: 빈 값 불허 한다.
+    7. AUTO_INCREMENT: 숫자 자료형인 경우 다음 로우가 저장될때
+    8. UNSIGNED: 0과 양수만 허용
+    9. ZEROFILL: 숫자의 자리 수가 고정된 경우 빈 자리에 0을 넣음
+    10. DEFAULT now(): 날짜 컬럼의 기본값을 현재 시간으로
+  - 테이블 옵션
+    1. COMMENT: 테이블에 대한 보충 설명
+    2. DEFAULT CHARSET: utf8로 설정을 해야 한글 입력가능
+    3. ENGINE: 엔진 선택
+  - MySQL 내에서 명령어
+    1. 테이블 확인: DESC 테이블명
+    2. 테이블 삭제: DROP TABLE 테이블명
+    3. 테이블 생성: CREATE TABLE DB이름.테이블명
+    4. 테이블 목록 보기: SHOW TABLES;
+  - 외래키(Foreign Key): 외래키를 두어 테이블간 관계가 있음을 표시
+    1. ON DELETE CASCADE, ON UPDATE CASCADE
+      : 로우가 지워지거나 수정될 때 관계 테이블의 연관된 로우도 지워지거나 수정된다.
+  - CRUD: Creeate, Read, Update, Delete
+    1. CREATE: INSERT INTO 데이터베이스명.테이블명 (컬럼명...) VALUES (값...);
+    2. READ: SELECT 컬럼 FROM 테이블명 
+      -WHERE로 조건 추가 가능
+      -ORDER BY로 정렬가능: DESC_내림차순, ASC_오름차순
+      -LIMIT: 조회할 개수 제한
+      -OFFSET: 앞의 로우들 스킵 가능 (오프셋 만큼 건너뛰고)
+    3. UPDATE: UPDATE 테이블명 SET 컬럼='바꿀 값' WHERE 조건
+    4. DELETE: DELETE FROM 테이블명 WHERE 조건
+  - Sequelize 사용
+    1. npx sequelize init: 시퀄라이즈 구조 생성
+    2. sequelize.sync: MySQL 연결 _ DB (만들어져 있어야함) 
+    3. npx sequelize db:create : config를 보고 db 생성
