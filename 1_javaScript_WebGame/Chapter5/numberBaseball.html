@@ -12,17 +12,30 @@
       <div class="webFrame">
         <div class="display">
           <div class="notch"></div>
-
           <!--Start content-->
-          <form id="form">
-            <input type="text" id="input" />
-            <button>확인</button>
-          </form>
-          <div id="logs"></div>
+          <div class="imageWrapper">
+            <img
+              class="countLogo"
+              src="../../util/baseball2.png"
+              alt="baseball"
+            />
+            <img id="state" src="../../util/baseball1.png" alt="baseball" />
+          </div>
+
+          <div class="gameWrapper">
+            <h1 class="title">Baseball Game!!</h1>
+            <form id="form">
+              <input type="text" id="input" />
+              <button>확인</button>
+            </form>
+            <div id="logs"></div>
+          </div>
+
           <script>
             const $input = document.querySelector('#input');
             const $form = document.querySelector('#form');
             const $logs = document.querySelector('#logs');
+
             // 배열 초기화
             const numbers = [];
             for (let i = 0; i < 9; i++) {
@@ -35,7 +48,7 @@
               answer.push(numbers[index]);
               numbers.splice(index, 1);
             }
-
+            console.log(answer);
             // 버튼 클릭 동작
             /*
               # form 접근 좀 더 알아보기
@@ -43,6 +56,7 @@
                   이처럼, 배열로 form안의 객체에 접근이 가능하다.
             */
             const tries = []; // 시도 내역
+            let outCount = 0; // self check
             function checkInput(input) {
               if (input.length !== 4) {
                 return alert('4자리 숫자를 입력해 주세요.');
@@ -68,10 +82,15 @@
               if (answer.join('') === value) {
                 // 홈런 검사
                 $logs.innerHTML = $logs.textContent + '<br/>홈런!'; // 로그 추가 방법 (1)
+                document.getElementById('state').src =
+                  '../../util/baseball6.png';
+                $input.disabled = true;
                 return;
               }
               if (tries.length >= 9) {
                 // 기회 카운트 _ 시도를 10번 이상하면 패배
+                document.getElementById('state').src =
+                  '../../util/baseball5.png';
                 const message = document.createTextNode(
                   `패배! 정답은 ${answer.join('')}`
                 );
@@ -91,11 +110,30 @@
                   }
                 }
               }
-              $logs.append(
-                // 로그 추가 방법 (3)
-                `${value}: ${strike} 스트라이크! & ${ball} 볼!`,
-                document.createElement('br')
-              );
+
+              if (strike + ball == 0) {
+                document.getElementById('state').src =
+                  '../../util/baseball5.png';
+                outCount++;
+                if (outCount >= 3) {
+                  $logs.append(
+                    `쓰리아웃 입니다! 정답은 ${answer} 입니다.`,
+                    document.createElement('br')
+                  );
+                  // 게임 종료후 인풋창 비활성화
+                  $input.disabled = true;
+                  return;
+                }
+                $logs.append(`${outCount}아웃!`, document.createElement('br'));
+              } else {
+                document.getElementById('state').src =
+                  '../../util/baseball4.png';
+                $logs.append(
+                  // 로그 추가 방법 (3)
+                  `${value}: ${strike} 스트라이크! & ${ball} 볼!`,
+                  document.createElement('br')
+                );
+              }
               tries.push(value);
             });
           </script>

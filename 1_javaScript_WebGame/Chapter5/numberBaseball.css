@@ -5,7 +5,7 @@ body {
   align-items: center;
   min-height: 100vh;
   margin: 0px;
-  background-color: #2a9d8f;
+  background-color: #fed049;
 }
 .webFrame {
   width: 70vw;
@@ -21,14 +21,16 @@ body {
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   overflow: scroll;
-  background-color: aliceblue;
+  background-color: #68b984;
   padding-left: 1vw;
   padding-right: 1vw;
 
   box-sizing: border-box;
-
-  background-image: url(../util/jsBackground.jpg);
+  background-image: url(../../util/baseball3.png);
   background-size: cover;
+  background-position: center;
+
+  text-align: center;
 }
 .notch {
   width: 60%;
@@ -73,3 +75,40 @@ nav img {
   color: #000;
 }
 /*End 기본프레임*/
+.imageWrapper {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.countLogo {
+  width: 40%;
+}
+#state {
+  width: 30%;
+}
+
+.gameWrapper {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 70%;
+  height: 65%;
+  overflow: scroll;
+  border-radius: 20px;
+  color: #fff;
+}
+
+.title {
+  color: #ff7000;
+}
+
+#form {
+  margin-bottom: 10px;
+  border-bottom: #fff 2px solid;
+  padding-bottom: 20px;
+}
