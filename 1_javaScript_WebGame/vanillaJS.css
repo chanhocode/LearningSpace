@@ -79,17 +79,120 @@ nav img {
 .appWrapper {
   float: left;
   width: 22%;
-  margin: 0.5vw;
+  margin: 0.6vw;
   text-align: center;
 }
 .appWrapper p {
   margin-top: 0.5vw;
   font-size: 0.7em;
 }
-.appWrapper button {
+
+/*app*/
+.app1 {
   cursor: pointer;
   width: 100%;
   aspect-ratio: 1/1;
   border-radius: 20px;
-  background-color: #2a9d8f;
+  background-color: #c58940;
+  background-image: url('../util/app1.png');
+  background-size: cover;
+}
+.app2 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #3d5656;
+  background-image: url('../util/app2.png');
+  background-size: cover;
+}
+.app3 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #379237;
+  background-image: url('../util/app3.png');
+  background-size: cover;
+}
+.app4 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #fce700;
+  background-image: url('../util/app4.png');
+  background-size: cover;
+}
+.app5 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #abd9ff;
+  background-image: url('../util/app5.png');
+  background-size: cover;
+}
+.app6 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #ffcb42;
+  background-image: url('../util/app6.png');
+  background-size: cover;
+}
+.app7 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #fff4cf;
+  background-image: url('../util/app7.png');
+  background-size: cover;
+}
+.app8 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #ffb200;
+  background-image: url('../util/app8.png');
+  background-size: cover;
+}
+.app9 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #9900f0;
+  background-image: url('../util/app9.png');
+  background-size: cover;
+}
+.app10 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #fd5d5d;
+  background-image: url('../util/app10.png');
+  background-size: cover;
+}
+.app11 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #ffc54d;
+  background-image: url('../util/app11.png');
+  background-size: cover;
+}
+.app12 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #ffb562;
+  background-image: url('../util/app12.png');
+  background-size: cover;
 }
