@@ -171,3 +171,39 @@ console.log(_get(user1, 'name'));
 console.log(users[10].name); -> 없는 값이므로 에러 발생
 console.log(_get(users[10], 'name')); -> undefined 반환
 ```
+
+### 4. reduce
+
+- 축약시켜서 원하는 새로운 결과를 만드는 함수
+
+```
+// 유사배열에서 slice 사용하기
+cosnt slice = Array.prototype.slice;
+function _rest(list, num) {
+  return slice.call(list, num || 1);
+}
+
+// iter을 재귀적으로 호출하면서 하나의 값으로 축약한다.
+function _reduce(list, iter, memo) {
+  if (arguments.length == 2) {
+    memo = list[0];
+    list = _rest(list)
+  }
+  _each(list, funcrtion(val) {
+    memo = iter(memo, val);
+  });
+  return memo;
+}
+
+_reduce([1, 2, 3], function(a, b) {
+  return a + b;
+}, 0)); // -> 6
+// 동작
+/*
+  add = function(a,b) {...};
+  1. memo = add(0, 1)
+  2. memo = add(memo, 2)
+  3. memo = add(memo, 3)
+  4. return memo
+*/
+```
