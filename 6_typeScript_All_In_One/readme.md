@@ -161,3 +161,198 @@ const obj: {
 const obj = { a: '123', b: 'hello', c: 'world' } as const;
 type Key = typeof obj[keyof typeof obj]; // type Key = '123' | 'hello' | 'world'
 ```
+
+7. union( | ), intersection( & )
+
+- union (OR) string | number // 문자열 또는 숫자
+- intersection (AND)
+
+```typescript
+// intersection
+type A = { hello: 'world' } & { zero: 'cho' };
+// 둘다 가지고 ( 만족해야 ) 있어야 한다.
+const a: A = { hello: 'world', zero: 'cho' };
+const a: A = { hello: 'world' }; // error
+// union
+type A = { hello: 'world' } & { zero: 'cho' };
+// 둘중 하나만 만족해도 된다.
+const a: A = { hello: 'world' }; // ok
+```
+
+8. 상속(extends)
+
+```typescript
+// type  상속
+type A = { a: true };
+type B = A & { c: true };
+type C = B & { b: true };
+
+const D: C = { a: true, b: true, c: true };
+
+// interface 상속
+interface A {
+  a: true;
+}
+interface B extends A {
+  b: true;
+}
+const C: B = { a: true, b: true };
+```
+
+9. 잉여속성 검사
+
+```typescript
+interface A {
+  a: srting;
+}
+const obj1: A = { a: 'hello', b: 'world' }; // error
+// 해결 _ 따로 변수로 정의
+const obj = { a: 'hello', b: 'world' };
+const obj1: A = obj;
+```
+
+10. void
+
+```typescript
+// 함수에서의 void _ (1) 리턴 값이 없다.
+function():void{return undefined};
+// 매개변수에서의 void _ (2) 리턴 값을 사용하지 않겠다.
+function a(() => void) {};
+// 메서드에서의 void _ (2) 리턴 값을 사용하지 않겠다.
+interface A { a: () => void};
+
+const B: A = {
+  a() {reuturn 'abc'}
+}
+```
+
+11. 타입가드
+
+```typescript
+function numOrStr(a: number | strting) {
+  if (typeof a === 'number') {
+    a.toFixed(1);
+  }
+  if (typeof a === 'string') {
+    a.charAt(3);
+  }
+}
+numOrStr('123');
+numOrStr(1);
+
+// class는 그자체로 타입이 될 수 있다.
+class A {
+  aaa() {}
+}
+class B {
+  bbb() {}
+}
+function aOrB(A | B) {
+  if(param instanceof A) {
+    param.aaa();
+  }
+}
+aOrB(new A());
+aOrB(new B());
+```
+
+- 커스텀 타입 가드 (is)
+
+```typescript
+interface Cat {
+  meow: number;
+}
+interface Dog {
+  bow: number;
+}
+// is 가 있어야 if문 안에서 구별을 해준다.
+function catOrDog(a: Cat | Dog): a is Dog {
+  // 타입 판별
+  if ((a as Cat).meow) {
+    return false;
+  }
+  return true;
+}
+function per(a: Cat | Dog) {
+  if (catOrDog(a)) {
+    // if ('meow' in a) {}
+    console.log(a.bow);
+  }
+}
+```
+
+12. readonly
+
+- 읽기 전용
+
+```typescript
+interface A {
+  readonly a: string;
+}
+const aaaa: A = { a: 'hello' };
+aaaa.a = '123'; // error
+```
+
+13. 인덱스트 시그니처, 맵드 타입스
+
+```typescript
+// 키가 전부다 문자열이고 그 값도 문자열이다.
+type A = { [key: string]: string };
+const aaaa: A = { a: 'a', b: 'b' };
+
+// "맵드 타입스" :: 키가 ... 중에
+typq B = 'A' | 'B' | 'C';
+type A = { [key in B]: number}
+const bbbb: A = {A: 1, B:2, C:3}
+```
+
+14. private, protected
+
+```typescript
+interface A {
+  readonly a: string;
+  b: string;
+}
+class B implements A {
+  private a: string; // class B 안에서만 사용 가능
+  protected b: string; // 상속받은 클래스 안에서 사용 가능
+}
+class C extends B {
+  method() {
+    console.log(this.b); // ok
+  }
+}
+new C().a; // error
+new C().b; // error
+```
+
+14. 옵셔널, 제네릭
+
+```typescript
+// 옵셔널 (?) 있을수도 없을 수도 있다.
+function abc(a: number, b?: number) {}
+abc(1); // ok
+abc(1, 2); // ok
+abc(1, 2, 3); // error
+
+// 제네릭
+// 제네릭은 타입에 대한 함수
+function add<T>(x: T, y: T) {
+  return x + y;
+}
+add<number>(1, 2);
+add(1, 2);
+add<string>('1', '2');
+add('1', '2');
+add(1, '2');
+
+// extends 제한
+function add<T extends string>(x: T, y: T) {
+  return x + y;
+}
+add<number>(1, 2); // error
+add(1, 2); // error
+add<string>('1', '2'); // ok
+add('1', '2');
+add(1, '2'); // error
+```
