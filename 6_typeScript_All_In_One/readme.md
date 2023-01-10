@@ -356,3 +356,97 @@ add<string>('1', '2'); // ok
 add('1', '2');
 add(1, '2'); // error
 ```
+
+## lib.es5.d.ts 분석
+
+1. forEach, map 제네릭 분석
+
+```typescript
+interface Array<T> {
+  forEach(
+    callbackfn: (value: T, index: number, array: T[]) => void,
+    thisArg?: any
+  ): void;
+
+  map<U>(callbackfn: (value: T, index:number, array: T[] => U, thisArg?: any): U[]);
+}
+
+// T( '<number>' )가 넘어가면서 타입을 정의
+const a: Array<number> = [1, 2, 3];
+a.forEach((value) => {
+  console.log(value);
+}); // 1, 2, 3
+
+// map<U>(callbackfn: (value: number, index:number, array: number[] => U, thisArg?: any): U[]);
+// item.toString() 리턴 값이 string 이므로 U는 string
+const strings = [1,2,3].map((item) => item.toString()); // ['1', '2', '3'] string[]
+```
+
+2. filter 제네릭 분석
+
+```typescript
+interface Array<T> {
+  filter<S extends T>(
+    predicate: (value: T, index: number, array: T[]) => value is S,
+    thisArg?: any
+  ): S[];
+  filter(
+    predicate: (value: T, index: number, array: T[]) => unknow,
+    thisArg?: any
+  ): T[];
+}
+
+/*
+  - T = number, 리턴값 number
+  filter<S extends T>(
+    predicate: (value: number, index: number, array: number[]) => value is number,
+    thisArg?: any
+  ): number[];
+*/
+const filtered = [1, 2, 3, 4, 5].filter((value) => value % 2); // number
+
+const filtered2 = ['1', 2, '3', 4, '5'].filter(
+  (value) => typeof value === 'string'
+); // const filterted2: (stirng | number)
+// 원하는 추론 ['1', '3', '5'] string[]
+const predicate = (value: string | number): value is string =>
+  typeof value === 'string';
+const filtered3 = ['1', 2, '3', 4, '5'].filter(predicate);
+```
+
+3. forEach 타입 만들어 보기
+
+```typescript
+interface Arr<T> {
+  forEach(callback: (item: T) => void): void;
+}
+const a: Arr<number> = [1, 2, 3];
+a.forEach((item) => {
+  console.log(item);
+});
+const b: Arr<string> = ['1', '2', '3'];
+b.forEach((item) => {
+  console.log(item);
+});
+```
+
+4. map 타입 만들어 보기
+
+```typescript
+interface Arr<T> {
+  map<S>(callback: (v: T) => S): S[];
+}
+const a: Arr<number> => [1, 2, 3];
+// 리턴값이 string이므로 S는 string 이다.
+const b: a.map((v) => v.toStirng()) // ['1', '2', '3']; string[]
+```
+
+5. filter타입 만들어 보기
+
+```typescript
+interface Arr<T> {
+  filter<S extends T>(callback: (v: T) => v is S): S[];
+}
+const a: Arr<number> => [1, 2, 3];
+const b = a.filter((v) => )
+```
