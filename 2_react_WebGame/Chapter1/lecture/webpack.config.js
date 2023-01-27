@@ -1,6 +1,4 @@
-const { appendFile } = require('fs');
 const path = require('path'); // 경로 조작
-const { webpack } = require('webpack');
 const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 // 웹팩설정
 module.exports = {
