@@ -258,3 +258,19 @@ _go(
   }
 );
 ```
+
+### 11. keys
+
+- null 을 넣어도 에러 안나게
+
+```javascript
+// 확인
+function _is_object(obj) {
+  return typeof obj === 'object' && !!obj;
+}
+function _keys(obj) {
+  return _is_object(obj) ? Object.keys(obj) : [];
+}
+```
+
+# chapter2. 컬렉션 중심 프로그래밍

@@ -19,7 +19,7 @@ body {
   overflow: hidden;
 
   /*active가 아닌 이곳에 트랜지션을 할당함으로써 닫힘 버튼 클릭시에도 애니메이션 활성화*/
-  transition: all 0.5s;
+  transition: all 1s;
 }
 
 #btn-all-close {
@@ -39,5 +39,5 @@ body {
 
 .active {
   display: block;
-  height: 300px;
+  height: 350px;
 }
