@@ -161,3 +161,25 @@
     1. npx sequelize init: 시퀄라이즈 구조 생성
     2. sequelize.sync: MySQL 연결 _ DB (만들어져 있어야함) 
     3. npx sequelize db:create : config를 보고 db 생성
+  
+6.Monfoose_MongoDB
+  - SQL & NoSQL
+    1. SQL: 규칙에 맞는 데이터 입력, 데이블 간 join 지원, 안정성, 일관성, 용어(테이블, 로우, 컬럼)
+    2. NoSQL: 자유로운 데이터 입력, 컬렉션 간 join 미지원, 확장성, 가용성, 용어(컬렉션, 다큐먼트, 필드)
+      // JOIN? 관계가 있는 테이블끼리 데이터를 합치는 기능
+    3. 실행확인 brew services llist
+    4. 실행: brew services start mongodb-community
+    5. 중지: brew services stop mongodb-community
+    6. mongoDB 연결 및 사용 : mongoDB 실행후 mongosh
+      use admin : 관리자 권한으로
+      사용자 추가: db.createUser({user: '이름', pwd: '비밀번호', roles['root']})
+    7. db확인: show dbs // 현재 db 확인: db
+    8. db추가: use db명
+    9. Collection 생성: db.createCollection('컬렉션명') _ 로우를 추가 하면 자동생성 되기때문에 선택 사항
+    10. Collection 확인: show collections
+    11. mongoDB는 컬럼을 정의하지 않아도 된다.
+    12. Read: db.컬렉션명.find({}) 모두 _ findOne 하나만
+        // 조건 추가: db.컬렉션명.find({}), { 조건 }
+        // 정렬 sort, 갯수제한 limit, 오프셋 skip
+    13. Update: db.컬렉션명.update ({조건}, {$set: {바꿀내용}}); // $set을 붙이지 않으면 필드 전체가 대체 된다.
+    14. Delete: db.컬렉션명.remove({조건})
