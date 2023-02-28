@@ -220,3 +220,19 @@
 
 <p>해쉬태그 검색</p>
 <img src='./readme/7_hashtag.png' />
+
+8.SNS_API
+
+- jwt 토근 발급하기
+
+<img src='./readme/8_api.png' />
+
+<img src='./readme/8_db.png' />
+
+- API 사용량 제한하기 및 새버전 업그레이드 알림
+
+<img src='./readme/8_limit.png' />
+
+<img src='./readme/8_deprecated.png' />
+
+- CORS 에러 해결하기
