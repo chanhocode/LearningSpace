@@ -221,6 +221,8 @@
 <p>해쉬태그 검색</p>
 <img src='./readme/7_hashtag.png' />
 
+---
+
 8.SNS_API
 
 - jwt 토근 발급하기
@@ -236,3 +238,32 @@
 <img src='./readme/8_deprecated.png' />
 
 - CORS 에러 해결하기
+
+---
+
+9.SNS_PJ_TEST
+
+```
+$ npm i -D jest
+```
+
+- filename.test.js 또는 filename.spec.js 파일 생성시 테스트 파일로 간주
+
+```javascript
+test('테스트 설명: 1 + 1 = 2 이다.', () => {
+  // 실제 행위
+  exprct(1 + 1).toEqual(2); // success
+});
+```
+
+- 통합테스트 \_ (routes에 사용)
+
+```
+$ npm i -D supertest
+```
+
+- 부하테스트
+
+```
+$ npm i -D artillery
+```
