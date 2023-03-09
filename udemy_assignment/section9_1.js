@@ -12,5 +12,8 @@ function reverse(str) {
 console.log(reverse('awesome')); // 'emosewa'
 console.log(reverse('rithmschool')); // 'loohcsmhtir'
 
-// let a = 'hello';
-// console.log(a.slice(1));
+// result
+function reverse(str){
+	if(str.length <= 1) return str;
+	return reverse(str.slice(1)) + str[0];
+}
