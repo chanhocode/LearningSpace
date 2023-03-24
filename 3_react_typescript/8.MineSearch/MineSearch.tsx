@@ -15,23 +15,43 @@ import {
 } from './action';
 
 export const CODE = {
-  MINE: -7,
-  NORMAL: -1,
-  QUESTION: -2,
-  FLAG: -3,
+  MINE: -7, // 지뢰
+  NORMAL: -1, // 일반
+  QUESTION: -2, // 물음표
+  FLAG: -3, // 깃발
   QUESTION_MINE: -4,
   FLAG_MINE: -5,
   CLICKED_MINE: -6,
   OPENED: 0, // 0 이상이면 다 opened
-};
+} as const; // 바뀔 일 이 없으므로 고정
 
-export const TableContext = createContext({
+export type Codes = typeof CODE[keyof typeof CODE];
+
+interface Context {
+  tableData: Codes[][];
+  halted: boolean;
+  dispatch: Dispatch<ReducerActions>;
+}
+export const TableContext = createContext<Context>({
   tableData: [],
   halted: true,
   dispatch: () => {},
 });
 
-const initialState = {
+interface ReducerState {
+  tableData: Codes[][];
+  data: {
+    row: number;
+    cell: number;
+    mine: number;
+  };
+  timer: number;
+  result: string;
+  halted: boolean;
+  openedCount: number;
+}
+
+const initialState: ReducerState = {
   tableData: [],
   data: {
     row: 0,
@@ -44,7 +64,8 @@ const initialState = {
   openedCount: 0,
 };
 
-const plantMine = (row, cell, mine) => {
+// 지뢰 심는 함수
+const plantMine = (row: number, cell: number, mine: number): Codes[][] => {
   const candidate = Array(row * cell)
     .fill(undefined)
     .map((arr, i) => {
@@ -58,9 +79,9 @@ const plantMine = (row, cell, mine) => {
     )[0];
     shuffle.push(chosen);
   }
-  const data = [];
+  const data: Codes[][] = [];
   for (let i = 0; i < row; i++) {
-    const rowData = [];
+    const rowData: Codes[] = [];
     data.push(rowData);
     for (let j = 0; j < cell; j++) {
       rowData.push(CODE.NORMAL);
@@ -77,7 +98,10 @@ const plantMine = (row, cell, mine) => {
   return data;
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (
+  state = initialState,
+  action: ReducerActions
+): ReducerState => {
   switch (action.type) {
     case START_GAME:
       return {
@@ -99,7 +123,7 @@ const reducer = (state = initialState, action) => {
       });
       const checked: string[] = [];
       let openedCount = 0;
-      const checkAround = (row, cell) => {
+      const checkAround = (row: number, cell: number) => {
         console.log(row, cell);
         if (
           row < 0 ||
@@ -110,13 +134,15 @@ const reducer = (state = initialState, action) => {
           return;
         } // 상하좌우 없는칸은 안 열기
         if (
-          [
-            CODE.OPENED,
-            CODE.FLAG,
-            CODE.FLAG_MINE,
-            CODE.QUESTION_MINE,
-            CODE.QUESTION,
-          ].includes(tableData[row][cell])
+          (
+            [
+              CODE.OPENED,
+              CODE.FLAG,
+              CODE.FLAG_MINE,
+              CODE.QUESTION_MINE,
+              CODE.QUESTION,
+            ] as Codes[]
+          ).includes(tableData[row][cell])
         ) {
           return;
         } // 닫힌 칸만 열기
@@ -141,8 +167,10 @@ const reducer = (state = initialState, action) => {
           ]);
         }
         const count = around.filter(function (v) {
-          return [CODE.MINE, CODE.FLAG_MINE, CODE.QUESTION_MINE].includes(v);
-        }).length;
+          return (
+            [CODE.MINE, CODE.FLAG_MINE, CODE.QUESTION_MINE] as Codes[]
+          ).includes(v);
+        }).length as Codes;
         if (count === 0) {
           // 주변칸 오픈
           if (row > -1) {
@@ -267,7 +295,7 @@ const MineSearch = () => {
   );
 
   useEffect(() => {
-    let timer;
+    let timer: number;
     if (halted === false) {
       timer = window.setInterval(() => {
         dispatch({ type: INCREMENT_TIMER });

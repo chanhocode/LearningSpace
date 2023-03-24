@@ -7,17 +7,18 @@ const Form = () => {
   const [row, setRow] = useState(10);
   const [cell, setCell] = useState(10);
   const [mine, setMine] = useState(20);
+
   const { dispatch } = useContext(TableContext);
 
-  const onChangeRow = useCallback((e) => {
+  const onChangeRow = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setRow(Number(e.target.value));
   }, []);
 
-  const onChangeCell = useCallback((e) => {
+  const onChangeCell = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setCell(Number(e.target.value));
   }, []);
 
-  const onChangeMine = useCallback((e) => {
+  const onChangeMine = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setMine(Number(e.target.value));
   }, []);
 
