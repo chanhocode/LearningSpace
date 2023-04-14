@@ -1,4 +1,4 @@
-// 이진 검색 (Binary Search Exercise)  "Worst: O() , Best: O(), Average: O() "
+// 이진 검색 (Binary Search Exercise)  "Worst: O(log n) , Best: O(1), Average: O(log n) "
 // Divide and Conquer
 
 function binarySearch(arr, target) {
