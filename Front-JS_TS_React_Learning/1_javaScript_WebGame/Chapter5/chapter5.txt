@@ -1,0 +1,49 @@
+# 숫자야구
+1. 게임 방법
+  - 상대편이 숫자 1~9중에서 중복되지 않게 네개를 고른다.
+  - 10번의 기회동안 상대편이 고른 숫자 네 개를 맞히는 게임
+    단, 숫자의 순서까지 맞혀야 한다.
+  - 틀릴 때마다 힌트를 준다.
+  - 맞힌 숫자의 개수, 순서 까지 맞힌 개수(스트라이크)를 알려준다.
+
+2. self check
+  - 아웃 구현하기 (0스트라이크 0볼 == 아웃, 아웃이 세번이면 게임 종료)
+  - Fix: (bug)게임종료 후에도 입력이 가능해서 공개된 정답으로 홈런 가능 -> 게임 종료 후 인풋 창 비활성화 코드 작성
+
+ex) result: 3 1 4 6 -> 1 2 3 4 (3볼: 1,3,4 숫자는 맞았지만 자리는 틀림) 
+            -> 3 5 6 7 (1스트라이크 1볼: 한개 숫자 자리를 맞고, 숫자는 맞았는데 자리가 틀림)
+            -> 2 5 8 9 (아웃) -> 3 1 4 6 (홈런)
+
+# slice(시작 인덱스, 마지막 인덱스) : 마지막 인덱스전 까지의 배열을 가져오지만 원본을 변화 시키지 않는다.
+# splice(시작 인덱스, 갯수) : 원본 배열이 변화한다.
+
+# sort(compareFunction(a, b))
+1. sort는 원본을 변화 시킨다.
+2. compareFunction(a, b)
+  1) 0보다 작은 경우 a가 먼저 나온다.
+  2) 0을 반환하면 서로에 대해 변경하지 않고 모든 다른 요소에 대해 정렬
+  3) 0보다 큰 경우 b를 a보다 낮은 인덱스로 sort 한다.
+  4) (a, b) => a - b : 오름차순
+  5) (a, b) => b - a : 
+  // 문자열도 정렬가능: (a, b) => a[0].charCodeAt() - b[0].charCodeAt()
+# setTimeout(()=>{}, 밀리초); : 지정한 시간을 기다린 후 동작
+
+# self check - 공 색칠하기
+10미만 빨강, 20미만 주황, 30미만 노랑, 40미만 파랑, 그 외 초록
+  - 교재 정답
+    function colorize(number, $tag) {
+      if (number < 10) {
+        $tag.style.backgroundColor = 'red';
+        $tag.style.color = 'white';
+      } else if (number < 20) {
+        $tag.style.backgroundColor = 'orange';
+      } else if (number < 30) {
+        $tag.style.backgroundColor = 'yellow';
+      } else if (number < 40) {
+        $tag.style.backgroundColor = 'blue';
+        $tag.style.color = 'white';
+      } else {
+        $tag.style.backgroundColor = 'green';
+        $tag.style.color = 'white';
+      }
+    }

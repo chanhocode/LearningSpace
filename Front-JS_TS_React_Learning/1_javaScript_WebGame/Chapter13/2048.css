@@ -1,0 +1,151 @@
+/* 기본 프레임 */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0px;
+  background-color: #fd8a8a;
+}
+.webFrame {
+  width: 70vw;
+  max-width: 530px;
+  aspect-ratio: 12/16;
+  background-color: #000;
+  border-radius: 40px;
+  border: 25px solid #000;
+  overflow: hidden;
+}
+.display {
+  width: 100%;
+  height: 92%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  overflow: scroll;
+  background-color: #f1f7b5;
+  padding-left: 1vw;
+  padding-right: 1vw;
+
+  box-sizing: border-box;
+  /* background-image: url(../../util/lotto2.png); */
+  background-size: cover;
+  background-position: center;
+
+  text-align: center;
+}
+.notch {
+  width: 60%;
+  height: 6%;
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: #000;
+}
+
+nav {
+  height: 8%;
+  background-color: #fff;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+nav img {
+  width: 12%;
+  margin-left: auto;
+  margin-right: auto;
+  aspect-ratio: 1/1;
+}
+.name {
+  display: block;
+  text-align: right;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+.name a {
+  text-decoration: none;
+  color: #000;
+}
+/*End 기본프레임*/
+
+#table {
+  border-collapse: collapse;
+  user-select: none;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#table td {
+  border: 10px solid #bbada0;
+  width: 105px;
+  height: 117px;
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+}
+#score {
+  user-select: none;
+}
+.color-2 {
+  background-color: #eee4da;
+  color: #776e65;
+}
+.color-4 {
+  background-color: #eee1c9;
+  color: #776e65;
+}
+.color-8 {
+  background-color: #f3b27a;
+  color: 'white';
+}
+.color-16 {
+  background-color: #f69664;
+  color: 'white';
+}
+.color-32 {
+  background-color: #f77c5f;
+  color: 'white';
+}
+.color-64 {
+  background-color: #f75f3b;
+  color: 'white';
+}
+.color-128 {
+  background-color: #edd073;
+  color: #776e65;
+}
+.color-256 {
+  background-color: #edcc62;
+  color: #776e65;
+}
+.color-512 {
+  background-color: #edc950;
+  color: #776e65;
+}
+.color-1024 {
+  background-color: #edc53f;
+  color: #776e65;
+}
+.color-2048 {
+  background-color: #edc22e;
+  color: #776e65;
+}
+
+.info {
+  display: flex;
+  width: 470px;
+  justify-content: space-between;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}

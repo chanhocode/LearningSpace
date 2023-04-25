@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>response-check @chanoho</title>
+    <link rel="stylesheet" href="./response-check.css" />
+  </head>
+  <body>
+    <div>
+      <div class="webFrame">
+        <div class="display">
+          <div class="notch"></div>
+          <!--Start content-->
+          <body>
+            <img class="logo" src="../../util/reponse.png" alt="reponse" />
+            <div id="screen" class="waiting">클릭해서 시작하세요</div>
+            <div id="result"></div>
+            <div id="rank"></div>
+            
+            <script>
+              const $screen = document.querySelector('#screen');
+              const $result = document.querySelector('#result');
+              const $rank = document.querySelector('#rank');
+              
+              let startTime;
+              let endTime;
+              let timeoutId;
+              const records = [];
+              // self-check
+              let rank;
+              $screen.addEventListener('click', (event) => {
+                if(event.target.classList.contains('waiting')) {
+                $screen.classList.remove('waiting');
+                $screen.classList.add('ready');
+                $screen.textContent = ('초록색이 되면 클릭하세요!');
+                timeoutId = setTimeout(function () {
+                  startTime = new Date();
+                  $screen.classList.remove('ready');
+                  $screen.classList.add('now');
+                  $screen.textContent = '클릭 하세요!';
+                  // 시간 측정 시작
+                }, Math.floor(Math.random()*1000)+2000)/// 2000~3000
+              } else if (event.target.classList.contains('ready')) {
+                clearTimeout(timeoutId)
+                $screen.classList.remove('ready');
+                $screen.classList.add('waiting');
+                $screen.textContent = '성급하게 클릭하셨습니다.';
+              } else if (event.target.classList.contains('now')) {
+                // 시간 측정 종료 및 저장
+                endTime = new Date();
+                const currnet = endTime - startTime;
+                records.push(currnet);
+                // self-check
+                rank = records.sort((a,b)=>a-b).slice(0,5);
+                // $rank.textContent = rank
+                $rank.textContent = '';
+                rank.forEach((top, index) => {
+                  $rank.append(
+                    document.createElement('br'),
+                    `${index + 1}위: ${top}ms`,
+                  )
+                })
+                const average = records.reduce((a,c)=>a+c) / records.length;
+                $result.textContent = `현재 ${endTime - startTime}ms, 평균: ${average}ms`;
+                startTime = null;
+                endTime = null;
+                $screen.classList.remove('now');
+                $screen.classList.add('waiting');
+                $screen.textContent = '클릭해서 시작하세요'
+              }})
+            </script>
+          <!--End content-->
+        </div>
+        <nav>
+          <a href="./vanillaJS.html"><img src="../..//util/bottom1.png" /></a>
+          <a href="./vanillaJS.html"><img src="../../util/bottom2.png" /></a>
+          <a href="./vanillaJS.html"><img src="../../util/bottom3.png" /></a>
+        </nav>
+      </div>
+      <div class="name">
+        <a href="https://github.com/chanhocode">@chanho</a>
+      </div>
+    </div>
+  </body>
+</html>

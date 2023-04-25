@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tictactoe @chanoho</title>
+    <link rel="stylesheet" href="./tictactoe.css" />
+  </head>
+  <body>
+    <div>
+      <div class="webFrame">
+        <div class="display">
+          <div class="notch"></div>
+          <div id="content">
+            <img class="logo" src="../../util/tictactoe.png" alt="logo" />
+          </div>
+          <!--Start content-->
+          <!--<table>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+          </table>-->
+          <script>
+            let turn = 'O';
+            // 테이블 생성
+            const data = [];
+            for (let i = 0; i < 3; i++) {
+              data.push([]);
+            }
+            const $table = document.createElement('table');
+            const $result = document.createElement('div');
+            $result.className = 'result';
+            const rows = [];
+
+            // 승부 판단하기
+            const checkWinner = (target) => {
+              const rowIndex = target.parentNode.rowIndex;
+              const cellIndex = target.cellIndex;
+
+              let hasWinner = false;
+              // 가로줄 체크
+              if (
+                rows[rowIndex][0].textContent === turn &&
+                rows[rowIndex][1].textContent === turn &&
+                rows[rowIndex][2].textContent === turn
+              ) {
+                hasWinner = true;
+              }
+              // 세로줄 검사
+              if (
+                rows[0][cellIndex].textContent === turn &&
+                rows[1][cellIndex].textContent === turn &&
+                rows[2][cellIndex].textContent === turn
+              ) {
+                hasWinner = true;
+              }
+              // 대각선 검사
+              if (
+                rows[0][0].textContent === turn &&
+                rows[1][1].textContent === turn &&
+                rows[2][2].textContent === turn
+              ) {
+                hasWinner = true;
+              }
+              if (
+                rows[0][2].textContent === turn &&
+                rows[1][1].textContent === turn &&
+                rows[2][0].textContent === turn
+              ) {
+                hasWinner = true;
+              }
+              return hasWinner;
+            };
+            const checkWinAndDrew = (target) => {
+              // 승부 판단
+              const hasWinner = checkWinner(target);
+              if (hasWinner) {
+                $result.textContent = `${turn}님이 승리!!`;
+                $table.removeEventListener('click', callback);
+                return;
+              }
+              //무승부 검사
+              // let draw = true;
+              // rows.forEach((row) => {
+              //   row.forEach((cell) => {
+              //     if (!cell.textContent) {
+              //       draw = false;
+              //     }
+              //   });
+              // });
+              const draw = rows.flat().every((cell) => cell.textContent);
+              if (draw) {
+                $result.textContent = '무승부';
+                return;
+              }
+              // 턴 변경
+              // if (turn === 'O') {
+              //   turn = 'X';
+              // } else if (turn === 'X') {
+              //   turn = 'O';
+              // }
+              turn = turn === 'O' ? 'X' : 'O';
+            };
+            let clickable = true;
+            const callback = (event) => {
+              if (!clickable) return;
+              // 빈칸 인지 아닌지 확인 _ 조건에 해당안되면 동작 안되게
+              if (event.target.textContent) return;
+              event.target.textContent = turn;
+              checkWinAndDrew(event.target);
+              if (turn === 'X') {
+                const emptyCells = rows.flat().filter((v) => !v.textContent);
+                const randomCells =
+                  emptyCells[Math.floor(Math.random() * emptyCells.length)];
+                clickable = false;
+                setTimeout(() => {
+                  randomCells.textContent = 'X';
+                  checkWinAndDrew(event.target);
+                  clickable = true;
+                }, 1000);
+              }
+            };
+            for (let i = 0; i < 3; i++) {
+              const $tr = document.createElement('tr');
+              const cells = [];
+              for (let j = 0; j < 3; j++) {
+                const $td = document.createElement('td');
+                cells.push($td);
+                // $td.addEventListener('click', callback);
+                $tr.appendChild($td);
+              }
+              rows.push(cells);
+              $table.append($tr);
+            }
+            $table.addEventListener('click', callback);
+            const $content = document.querySelector('#content');
+            $content.append($table);
+            $content.append($result);
+          </script>
+          <!--End content-->
+        </div>
+        <nav>
+          <a href="./vanillaJS.html"><img src="../..//util/bottom1.png" /></a>
+          <a href="./vanillaJS.html"><img src="../../util/bottom2.png" /></a>
+          <a href="./vanillaJS.html"><img src="../../util/bottom3.png" /></a>
+        </nav>
+      </div>
+      <div class="name">
+        <a href="https://github.com/chanhocode">@chanho</a>
+      </div>
+    </div>
+  </body>
+</html>

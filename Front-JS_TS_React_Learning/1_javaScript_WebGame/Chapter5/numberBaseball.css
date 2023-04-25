@@ -1,0 +1,114 @@
+/* 기본 프레임 */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0px;
+  background-color: #fed049;
+}
+.webFrame {
+  width: 70vw;
+  max-width: 530px;
+  aspect-ratio: 12/16;
+  background-color: rgb(34, 24, 24);
+  border-radius: 40px;
+  border: 25px solid #000;
+}
+.display {
+  width: 100%;
+  height: 92%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  overflow: scroll;
+  background-color: #68b984;
+  padding-left: 1vw;
+  padding-right: 1vw;
+
+  box-sizing: border-box;
+  background-image: url(../../util/baseball3.png);
+  background-size: cover;
+  background-position: center;
+
+  text-align: center;
+}
+.notch {
+  width: 60%;
+  height: 6%;
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: #000;
+}
+
+nav {
+  height: 8%;
+  background-color: #fff;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+nav img {
+  width: 12%;
+  margin-left: auto;
+  margin-right: auto;
+  aspect-ratio: 1/1;
+}
+.name {
+  display: block;
+  text-align: right;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+.name a {
+  text-decoration: none;
+  color: #000;
+}
+/*End 기본프레임*/
+.imageWrapper {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.countLogo {
+  width: 40%;
+}
+#state {
+  width: 30%;
+}
+
+.gameWrapper {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 70%;
+  height: 65%;
+  overflow: scroll;
+  border-radius: 20px;
+  color: #fff;
+}
+
+.title {
+  color: #ff7000;
+}
+
+#form {
+  margin-bottom: 10px;
+  border-bottom: #fff 2px solid;
+  padding-bottom: 20px;
+}

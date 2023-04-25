@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>끝말잇기 @chanho</title>
+    <link rel="stylesheet" href="./word-relay.css" />
+  </head>
+  <body>
+    <div class="gameForm">
+      <img class="gamePad" src="../../util/gamepad.png" alt="pad" />
+      <h1>끝말잇기 게임!!</h1>
+
+      <div class="play">
+        <div class="userNum"><span id="order">1</span>번째 참가자</div>
+        <div class="gameWord">제시어: <span id="word"></span></div>
+        <div class="comment">
+          <input type="text" />
+          <button>입력</button>
+        </div>
+      </div>
+
+      <img src="../../util/keyboard.png" class="keyboard" alt="keyboard" />
+    </div>
+
+    <script>
+      const number = parseInt(prompt('몇 명이 참가하나요?'), 10);
+      alert(number + '명을 입력하였습니다.');
+      const yesOrNo = confirm(number + '명이 맞습니까?');
+
+      const $button = document.querySelector('button');
+      const $input = document.querySelector('input');
+      const $word = document.querySelector('#word');
+      const $order = document.querySelector('#order');
+      let word;
+      let newWord;
+
+      const onClickButton = function () {
+        // 제시어 확인
+        if (!word || word[word.length - 1] === newWord[0]) {
+          // 입력한 단어가 제시어가 된다.
+          word = newWord;
+          $word.textContent = word;
+          $input.value = '';
+          const order = parseInt($order.textContent);
+          // 참가자 판단
+          if (order === number) {
+            $order.textContent = 1;
+          } else {
+            $order.textContent = order + 1;
+          }
+          $input.value = '';
+          $input.focus();
+        } else {
+          alert('틀렸습니다!');
+          $input.value = '';
+          $input.focus();
+        }
+      };
+      const onInput = (e) => {
+        newWord = e.target.value;
+      };
+
+      $input.addEventListener('input', onInput);
+      $button.addEventListener('click', onClickButton);
+    </script>
+  </body>
+</html>

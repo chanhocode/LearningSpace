@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VanillaJS @chanoho</title>
+    <title>계산기 @chanho</title>
+    <link rel="stylesheet" href="./calculator.css" />
+  </head>
+  <body>
+    <div>
+      <div class="webFrame">
+        <div class="display">
+          <div class="notch"></div>
+          <div class="contentWrapper">
+          <div class="content">
+            <img src="../../util/question.png" alt="question" />
+            <input readonly id="operator" />
+    <input readonly type="number" id="result" />
+    <div class="row">
+      <button id="num-7">7</button>
+      <button id="num-8">8</button>
+      <button id="num-9">9</button>
+      <button id="plus">+</button>
+    </div>
+    <div class="row">
+      <button id="num-4">4</button>
+      <button id="num-5">5</button>
+      <button id="num-6">6</button>
+      <button id="minus">-</button>
+    </div>
+    <div class="row">
+      <button id="num-1">1</button>
+      <button id="num-2">2</button>
+      <button id="num-3">3</button>
+      <button id="divide">/</button>
+    </div>
+    <div class="row">
+      <button id="clear">C</button>
+      <button id="num-0">0</button>
+      <button id="calculate">=</button>
+      <button id="multiply">x</button>
+    </div>
+  </div>
+  </body>
+  <script>
+    let numOne = '';
+    let operator = '';
+    let numTwo = '';
+    const $operator = document.querySelector('#operator');
+    const $result = document.querySelector('#result');
+
+    const onClickNumber = (e) => {
+      if (!numOne) {
+        $result.value = '';
+        $operator.value = '';
+      }
+      if (!operator) {
+        numOne += e.target.textContent;
+        $result.value += e.target.textContent;
+        return;
+      }
+      if (!numTwo) {
+        $result.value = '';
+      }
+      numTwo += e.target.textContent;
+      $result.value += e.target.textContent;
+    };
+
+    document.querySelector('#num-0').addEventListener('click', onClickNumber);
+    document.querySelector('#num-1').addEventListener('click', onClickNumber);
+    document.querySelector('#num-2').addEventListener('click', onClickNumber);
+    document.querySelector('#num-3').addEventListener('click', onClickNumber);
+    document.querySelector('#num-4').addEventListener('click', onClickNumber);
+    document.querySelector('#num-5').addEventListener('click', onClickNumber);
+    document.querySelector('#num-6').addEventListener('click', onClickNumber);
+    document.querySelector('#num-7').addEventListener('click', onClickNumber);
+    document.querySelector('#num-8').addEventListener('click', onClickNumber);
+    document.querySelector('#num-9').addEventListener('click', onClickNumber);
+
+    const onClickOperator = (op) => () => {
+      if (numOne) {
+        operator = op;
+        $operator.value = op;
+      } else {
+        alert('숫자를 입력하세요!');
+      }
+    };
+    document
+      .querySelector('#plus')
+      .addEventListener('click', onClickOperator('+'));
+    document
+      .querySelector('#minus')
+      .addEventListener('click', onClickOperator('-'));
+    document
+      .querySelector('#divide')
+      .addEventListener('click', onClickOperator('/'));
+    document
+      .querySelector('#multiply')
+      .addEventListener('click', onClickOperator('*'));
+    document.querySelector('#calculate').addEventListener('click', () => {
+      if (numTwo) {
+        switch (operator) {
+          case '+':
+            $result.value = parseInt(numOne) + parseInt(numTwo);
+            break;
+          case '-':
+            $result.value = numOne - numTwo;
+            break;
+          case '*':
+            $result.value = numOne * numTwo;
+            break;
+          case '/':
+            $result.value = numOne / numTwo;
+            break;
+          default:
+            break;
+        }
+        $operator.value = '';
+        numOne = $result.value;
+        numTwo = '';
+        operator = '';
+      } else {
+        alert('숫자를 입력하세요.');
+      }
+    });
+    document.querySelector('#clear').addEventListener('click', () => {
+      numOne = '';
+      operator = '';
+      numTwo = '';
+      $operator.value = '';
+      $result.value = '';
+    });
+  </script>
+          </div>
+        </div>
+        <nav>
+          <a href="../vanillaJS.html"><img src="../../util/bottom1.png" /></a>
+          <a href="../vanillaJS.html"><img src="../../util/bottom2.png" /></a>
+          <a href="../vanillaJS.html"><img src="../../util/bottom3.png" /></a>
+        </nav>
+      </div>
+      <div class="name">
+        <a href="https://github.com/chanhocode">@chanho</a>
+      </div>
+    </div>
+  </body>
+</html>

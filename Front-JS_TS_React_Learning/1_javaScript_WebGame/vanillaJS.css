@@ -1,0 +1,198 @@
+/* 기본 프레임 */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0px;
+  background-color: #2a9d8f;
+}
+.webFrame {
+  width: 70vw;
+  max-width: 530px;
+  aspect-ratio: 12/16;
+  background-color: #000;
+  border-radius: 40px;
+  border: 25px solid #000;
+}
+.display {
+  width: 100%;
+  height: 92%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  overflow: scroll;
+  background-color: aliceblue;
+  padding-left: 1vw;
+  padding-right: 1vw;
+
+  box-sizing: border-box;
+
+  background-image: url(../util/jsBackground.jpg);
+  background-size: cover;
+}
+.notch {
+  width: 60%;
+  height: 6%;
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: #000;
+}
+
+nav {
+  height: 8%;
+  background-color: #fff;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+nav img {
+  width: 12%;
+  margin-left: auto;
+  margin-right: auto;
+  aspect-ratio: 1/1;
+}
+.name {
+  display: block;
+  text-align: right;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+.name a {
+  text-decoration: none;
+  color: #000;
+}
+/*End 기본프레임*/
+.appTable {
+  width: 100%;
+}
+.appWrapper {
+  float: left;
+  width: 22%;
+  margin: 0.6vw;
+  text-align: center;
+}
+.appWrapper p {
+  margin-top: 0.5vw;
+  font-size: 0.7em;
+}
+
+/*app*/
+.app1 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #c58940;
+  background-image: url('../util/app1.png');
+  background-size: cover;
+}
+.app2 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #3d5656;
+  background-image: url('../util/app2.png');
+  background-size: cover;
+}
+.app3 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #379237;
+  background-image: url('../util/app3.png');
+  background-size: cover;
+}
+.app4 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #fce700;
+  background-image: url('../util/app4.png');
+  background-size: cover;
+}
+.app5 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #abd9ff;
+  background-image: url('../util/app5.png');
+  background-size: cover;
+}
+.app6 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #ffcb42;
+  background-image: url('../util/app6.png');
+  background-size: cover;
+}
+.app7 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #fff4cf;
+  background-image: url('../util/app7.png');
+  background-size: cover;
+}
+.app8 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #ffb200;
+  background-image: url('../util/app8.png');
+  background-size: cover;
+}
+.app9 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #9900f0;
+  background-image: url('../util/app9.png');
+  background-size: cover;
+}
+.app10 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #fd5d5d;
+  background-image: url('../util/app10.png');
+  background-size: cover;
+}
+.app11 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #ffc54d;
+  background-image: url('../util/app11.png');
+  background-size: cover;
+}
+.app12 {
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  background-color: #ffb562;
+  background-image: url('../util/app12.png');
+  background-size: cover;
+}

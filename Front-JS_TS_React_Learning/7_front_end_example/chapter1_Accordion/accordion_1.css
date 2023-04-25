@@ -1,0 +1,43 @@
+html,
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+.panel-faq-container {
+  margin-bottom: -16px;
+}
+.panel-faq-title {
+  color: #00eaea;
+  cursor: pointer;
+}
+.panel-faq-answer {
+  /* 화면에서 안보이게 하는 방법(1)*/
+  /* display: none; */
+  /* 화면에서 안보이게 하는 방법(2)*/
+  height: 0;
+  overflow: hidden;
+
+  /*active가 아닌 이곳에 트랜지션을 할당함으로써 닫힘 버튼 클릭시에도 애니메이션 활성화*/
+  transition: all 1s;
+}
+
+#btn-all-close {
+  margin-bottom: 10px;
+  background-color: #726996;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px 25px;
+  float: right;
+}
+#btn-all-close:hover {
+  background-color: red;
+  color: #fff;
+  transition: all 0.25s;
+}
+
+.active {
+  display: block;
+  height: 350px;
+}

@@ -1,0 +1,141 @@
+/* 기본 프레임 */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0px;
+  background-color: #3c79f5;
+}
+.webFrame {
+  width: 70vw;
+  max-width: 530px;
+  aspect-ratio: 12/16;
+  background-color: #000;
+  border-radius: 40px;
+  border: 25px solid #000;
+  overflow: hidden;
+}
+.display {
+  width: 100%;
+  height: 92%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  overflow: scroll;
+  background-color: #89c4e1;
+  padding-left: 1vw;
+  padding-right: 1vw;
+
+  box-sizing: border-box;
+  /* background-image: url(../../util/lotto2.png); */
+  background-size: cover;
+  background-position: center;
+
+  text-align: center;
+}
+.notch {
+  width: 60%;
+  height: 6%;
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: #000;
+}
+
+nav {
+  height: 8%;
+  background-color: #fff;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+nav img {
+  width: 12%;
+  margin-left: auto;
+  margin-right: auto;
+  aspect-ratio: 1/1;
+}
+.name {
+  display: block;
+  text-align: right;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+.name a {
+  text-decoration: none;
+  color: #000;
+}
+/*End 기본프레임*/
+.cell {
+  display: inline-block;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background: 'yellow';
+  overflow: hidden;
+}
+.gopher,
+.bomb {
+  width: 100px;
+  height: 100px;
+  bottom: 0;
+  position: absolute;
+  transition: bottom 1s;
+}
+.gopher {
+  background: url('./gopher.png') center center no-repeat;
+  background-size: 100px 100px;
+}
+.dead {
+  background: url('./dead_gopher.png') center center no-repeat;
+  background-size: 100px 100px;
+}
+.bomb {
+  background: url('./bomb.png') center center no-repeat;
+  background-size: 100px 100px;
+}
+.boom {
+  background: url('./explode.png') center center no-repeat;
+  background-size: 100px 100px;
+}
+.hidden {
+  bottom: -100px;
+}
+.hole {
+  width: 100px;
+  height: 75px;
+  position: absolute;
+  bottom: 0;
+  background: url('./mole-hole.png') center center no-repeat;
+  background-size: 100px 75px;
+}
+.hole-front {
+  width: 100px;
+  height: 15px;
+  position: absolute;
+  bottom: 0;
+  background: url('./mole-hole-front.png') center center no-repeat;
+  background-size: 100px 15px;
+}
+#info {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+#game {
+  width: 80%;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #fff;
+  border-radius: 10px;
+}

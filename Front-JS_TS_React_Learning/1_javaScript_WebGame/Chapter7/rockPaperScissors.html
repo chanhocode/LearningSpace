@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rock paper scissors @chanoho</title>
+    <link rel="stylesheet" href="./rockPaperScissors.css" />
+  </head>
+  <body>
+    <div>
+      <div class="webFrame">
+        <div class="display">
+          <div class="notch"></div>
+          <!--Start content-->
+          <body>
+            <div class="handDisplay">
+              <div>
+                <h1>Computer!!</h1>
+                <div id="computer" class="hand"></div>
+              </div>
+              <div>
+                <h1>Me!!</h1>
+                <div id="me" class="hand"></div>
+              </div>
+            </div>            
+            <div class="btnGroup">
+              <button id="scissors" class="btn">scissors</button>
+              <button id="rock" class="btn">rock</button>
+              <button id="paper" class="btn">paper</button>
+            </div>
+            <div class="game">
+              <div id="state"></div>
+              <div id="score">0</div>
+            </div>
+            <script>
+              const $computer = document.querySelector('#computer');
+              const $me = document.querySelector('#me');
+              const $score = document.querySelector('#score');
+              const $state = document.querySelector('#state');
+              const $rock = document.querySelector('#rock');
+              const $scissors = document.querySelector('#scissors');
+              const $paper = document.querySelector('#paper');
+              const IMG_URL = './rps.png';
+
+              // 디스플레이 기본값 설정
+              $computer.style.background = `url(${IMG_URL}) 0 0`;
+              $computer.style.backgroundSize = 'auto 200px';
+              
+              // 이미지 좌표 명시
+              const rpsX={
+                scissors: '0',
+                rock: '-220px',
+                paper: '-440px',
+              }
+
+              // 디스플레이 화면 움직임
+              let computerChoice = 'scissors';
+              const changeComputerHand = () => {
+                switch(computerChoice) {
+                  case 'scissors':
+                    computerChoice = 'rock';
+                    break
+                  case 'rock':
+                    computerChoice = 'paper';
+                    break
+                  case 'paper':
+                    computerChoice = 'scissors'
+                    break
+                  default:
+                    break;
+                }
+                $computer.style.background = `url(${IMG_URL}) ${rpsX[computerChoice]} 0`;
+                $computer.style.backgroundSize = 'auto 200px';
+              }
+              let intervalId = setInterval(changeComputerHand, 50);
+
+              const scoreTable = {
+                rock: 0,
+                scissors: 1,
+                paper: -1,
+              }
+              
+              // 문제 발생: 버튼을 연속하여 클릭하는 경우 인터벌이 추가적으로 생성되며 clear되지 못하고 쌓이게 된다.
+              // 상태변수를 두어 문제 수정(3)
+              let clickable = true;
+              let score = 0;
+
+              // slef-check
+              let victory = 3;
+              let lose = 3;
+
+              const clickButton = () => {
+                if (clickable && victory != 0 && lose != 0) {
+                  // self-check
+                  clearInterval(intervalId);
+                  // removeEventListener을 이용하여 컴퓨터 상태를 표시하는동안 버튼을 클릭할 수 없게 만들어 수정 (2)
+                  // $rock.removeEventListener('click', clickButton);
+                  // $scissors.removeEventListener('click', clickButton);
+                  // $paper.removeEventListener('click', clickButton);
+                  
+                  // (3)
+                  clickable = false;
+          
+                  // 점수 표시
+                  const myChoice = event.target.id;
+                  const myScore = scoreTable[myChoice];
+                  const computerScore = scoreTable[computerChoice];
+                  const diff = myScore - computerScore;
+
+                  $me.style.background = `url(${IMG_URL}) ${rpsX[myChoice]} 0`;
+                  $me.style.backgroundSize = 'auto 200px';
+
+                  let message;
+                  if([2, -1].includes(diff)) {
+                    console.log('승리');
+                    victory--;
+                    score++;
+                    message = '승리';
+                    $state.style.background = `url('../../util/win.png') 0 0`;
+                    $state.style.backgroundSize = 'auto 150px';
+                  } else if (diff === -2 || diff === 1) {
+                    score--;
+                    lose--;
+                    message = '패배';
+                    console.log('패배');
+                    $state.style.background = `url('../../util/lose.png') 0 0`;
+                    $state.style.backgroundSize = 'auto 150px';
+                  } else if (diff === 0) {
+                    console.log('무승부')
+                    message = '무승부';
+                    $state.style.background = `url('../../util/boom.png') 0 0`;
+                    $state.style.backgroundSize = 'auto 150px';
+                  }
+                  $score.textContent = `${message} 총: ${score}점`;
+                  setTimeout(()=> {
+                    // self-check _ 게임 종료시 가위바위보 화면 정지
+                    if(victory === 0 || lose === 0) {
+                      clearInterval(intervalId);
+                      return
+                    }
+                    // clearInterval을 하여 인터벌이 중복 되는 문제 수정 방법 (1)
+                    // clearInterval(intervalId);
+                    // (2)
+                    // $rock.addEventListener('click', clickButton);
+                    // $scissors.addEventListener('click', clickButton);
+                    // $paper.addEventListener('click', clickButton);
+                    clickable = true;
+                    intervalId = setInterval(changeComputerHand, 50)
+                  }, 1000)
+                }
+              }
+              $rock.addEventListener('click', clickButton);
+              $scissors.addEventListener('click', clickButton);
+              $paper.addEventListener('click', clickButton);
+            </script>
+          <!--End content-->
+        </div>
+        <nav>
+          <a href="./vanillaJS.html"><img src="../..//util/bottom1.png" /></a>
+          <a href="./vanillaJS.html"><img src="../../util/bottom2.png" /></a>
+          <a href="./vanillaJS.html"><img src="../../util/bottom3.png" /></a>
+        </nav>
+      </div>
+      <div class="name">
+        <a href="https://github.com/chanhocode">@chanho</a>
+      </div>
+    </div>
+  </body>
+</html>

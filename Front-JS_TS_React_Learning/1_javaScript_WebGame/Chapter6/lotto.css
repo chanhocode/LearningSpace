@@ -1,0 +1,113 @@
+/* 기본 프레임 */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0px;
+  background-color: #FBF2CF;
+}
+.webFrame {
+  width: 70vw;
+  max-width: 530px;
+  aspect-ratio: 12/16;
+  background-color: #000;
+  border-radius: 40px;
+  border: 25px solid #000;
+  overflow: hidden;
+}
+.display {
+  width: 100%;
+  height: 92%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  overflow: scroll;
+  background-color: #fed049;
+  padding-left: 1vw;
+  padding-right: 1vw;
+
+  box-sizing: border-box;
+  background-image: url(../../util/lotto2.png);
+  background-size: cover;
+  background-position: center;
+
+  text-align: center;
+}
+.notch {
+  width: 60%;
+  height: 6%;
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: #000;
+}
+
+nav {
+  height: 8%;
+  background-color: #fff;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+nav img {
+  width: 12%;
+  margin-left: auto;
+  margin-right: auto;
+  aspect-ratio: 1/1;
+}
+.name {
+  display: block;
+  text-align: right;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+.name a {
+  text-decoration: none;
+  color: #000;
+}
+/*End 기본프레임*/
+.ball {
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 20px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
+  text-align: center;
+  margin-right: 20px;
+}
+
+.lottoLogo {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 60%;
+}
+
+.lottoWrapper {
+  width: 95%;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: left;
+}
+#result {
+  margin-bottom: 20px;
+}
+#bonus {
+}
