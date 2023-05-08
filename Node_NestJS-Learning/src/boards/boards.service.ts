@@ -1,17 +1,22 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { BoardStatus } from './board-status.enum';
-import { v1 as uuid } from 'uuid';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { BoardRepository } from './board.repository';
 import { Board } from './board.entity';
+import { User } from '../auth/user.entity';
+
 @Injectable()
 export class BoardsService {
   constructor(private boardRepository: BoardRepository) {}
   /**
    * 모든 게시글 불러오기
    */
-  async getAllBoards(): Promise<Board[]> {
-    return this.boardRepository.find();
+  async getAllBoards(user: User): Promise<Board[]> {
+    const query = this.boardRepository.createQueryBuilder('board');
+
+    query.where('board.userId = :userId', { userId: user.id });
+    const boards = await query.getMany();
+    return boards;
   }
 
   /**
@@ -42,9 +47,14 @@ export class BoardsService {
    * 특정 게시글 제거
    * @param id
    */
-  async deleteBoard(id: number): Promise<void> {
-    const result = await this.boardRepository.delete(id);
-    console.log(result);
+  async deleteBoard(id: number, user: User): Promise<void> {
+    const result = await this.boardRepository
+      .createQueryBuilder('board')
+      .delete()
+      .from(Board)
+      .where('userId = :userId', { userId: user.id })
+      .andWhere('id = :id', { id: id })
+      .execute();
     if (result.affected === 0) {
       throw new NotFoundException(`Can't find Board with id ${id}`);
     }
