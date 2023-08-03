@@ -1,11 +1,13 @@
 package com.ltbmain.ltbmain;
 
 import com.ltb.ltb.Holoman;
+import com.ltb.ltb.HolomanProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -24,13 +26,14 @@ public class LtbMainApplication {
 		application.run(args);
     }
 
-	// 무시
-	@Bean
-	public Holoman holoman() {
-		Holoman holoman = new Holoman();
-		holoman.setName("Jo");
-		holoman.setHowLong(10);
-		return holoman;
-	}
+	// (기존) 무시 (내가 등록한 빈 보다 EnableAutoConfiguration 우선시 됨)
+	// 해결: HolomanConfiguration에 @ConditionalOnMissingBean 추가
+//	@Bean
+//	public Holoman holoman() {
+//		Holoman holoman = new Holoman();
+//		holoman.setName("Jo");
+//		holoman.setHowLong(10);
+//		return holoman;
+//	}
 }
 
