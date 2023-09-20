@@ -129,7 +129,10 @@
   <ItemGroup>
     <ClCompile Include="ex_1330.cpp" />
     <ClCompile Include="ex_14681.cpp" />
+    <ClCompile Include="ex_2480.cpp" />
+    <ClCompile Include="ex_2525.cpp" />
     <ClCompile Include="ex_2753.cpp" />
+    <ClCompile Include="ex_2884.cpp" />
     <ClCompile Include="ex_9498.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
