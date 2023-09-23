@@ -30,5 +30,14 @@
     <ClCompile Include="ex_10810.cpp">
       <Filter>리소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="ex_10813.cpp">
+      <Filter>리소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ex_5597.cpp">
+      <Filter>리소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ex_3052.cpp">
+      <Filter>리소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
