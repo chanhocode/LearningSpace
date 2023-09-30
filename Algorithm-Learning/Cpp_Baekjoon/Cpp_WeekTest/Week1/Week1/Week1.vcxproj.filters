@@ -18,5 +18,11 @@
     <ClCompile Include="ex1A_2309.cpp">
       <Filter>리소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="ex1B_10808.cpp">
+      <Filter>리소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ex1C_2979.cpp">
+      <Filter>리소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
