@@ -135,6 +135,8 @@
     <ClCompile Include="ex1F_11655.cpp" />
     <ClCompile Include="ex1G_9996.cpp" />
     <ClCompile Include="ex1H_2559.cpp" />
+    <ClCompile Include="ex1I_1620.cpp" />
+    <ClCompile Include="ex1J_9375.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

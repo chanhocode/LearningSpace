@@ -39,5 +39,11 @@
     <ClCompile Include="ex1H_2559.cpp">
       <Filter>리소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="ex1I_1620.cpp">
+      <Filter>리소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ex1J_9375.cpp">
+      <Filter>리소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
