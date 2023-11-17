@@ -10,6 +10,13 @@ import java.util.*;
 * 장점: 각 요소들의 접근이 빠르다.
 * 단점: 요소 추가 및 제거시 성능이 안좋다.
 * 즉, 변경이 드물고 빠른 접근 필요시 사용
+*
+* LinkedList
+* - Queue를 구현하는 용도로 사용가능
+* - 각각 이전/다음 요소들로의 링크를 가짐
+* 장점: 요소의 추가와 제거가 빠름
+* 단점: 요소에 대한 접근이 느림
+* 즉, 요소들의 추가/제거가 많은 프로그램에 적합하다.
 * */
 
 public class Main {
@@ -81,5 +88,35 @@ public class Main {
 
         // 리스트 비우기
         ints1.clear();
+
+
+        // LinkedList
+        LinkedList<Integer> intNums = new LinkedList<>();
+        for(var intNum: new int[] {2,3,4}) { intNums.add(intNum); };
+
+        // 앞에 추가
+        intNums.addFirst(1);
+        // 뒤에 추가
+        intNums.addLast(5);
+
+        // 요소 반환
+        // peek: 비어있을 경우 null반환
+        int peekedFirst = intNums.peekFirst();
+        int peekedLast = intNums.peekLast();
+        // get: 비어있을 경우 익셉션
+        int gottenFirst = intNums.getFirst();
+        int gottenLast = intNums.getLast();
+
+        // Stack 구현
+        LinkedList<Character> charLList = new LinkedList<>();
+        charLList.push('A');
+        charLList.push('B');
+        charLList.push('C');
+        charLList.push('D');
+        charLList.push('E');
+
+        char pop1 = charLList.pop();
+        char pop2 = charLList.pop();
+        char pop3 = charLList.pop();
     }
 }
