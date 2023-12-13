@@ -13,12 +13,15 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.then;
+import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@Transactional
 @SpringBootTest
 @AutoConfigureMockMvc
 class AccountControllerTest {
@@ -29,6 +32,17 @@ class AccountControllerTest {
 
     @MockBean
     JavaMailSender javaMailSender;
+
+    @DisplayName("인증 메일 확인 - 입력 값 오류")
+    @Test
+    void checkEmailToken_with_wrong_input() throws Exception {
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/check-email-token")
+                        .param("token", "fdjhioaf")
+                        .param("email", "email@gmail.com")
+        )
+                .andExpect(status().isOk());
+    }
 
     @DisplayName("회원 가입 화면에 진입하는지 테스트")
     @Test
@@ -73,6 +87,7 @@ class AccountControllerTest {
         Account account = accountRepository.findByEmail("hi@gmail.com");
         assertNotNull(account);
         assertNotEquals(account.getPassword(),"12345678");
+        assertNotNull(account.getEmailCheckToken());
         then(javaMailSender).should().send(any(SimpleMailMessage.class));
     }
 }
