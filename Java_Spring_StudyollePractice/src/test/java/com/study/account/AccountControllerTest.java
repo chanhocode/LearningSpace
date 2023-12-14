@@ -38,11 +38,35 @@ class AccountControllerTest {
     void checkEmailToken_with_wrong_input() throws Exception {
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/check-email-token")
-                        .param("token", "fdjhioaf")
-                        .param("email", "email@gmail.com")
-        )
-                .andExpect(status().isOk());
+                        .param("token", "sdfjslwfwef")
+                        .param("email", "email@email.com")
+                )
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("error"))
+                .andExpect(view().name("account/checked-email"));
     }
+
+    @DisplayName("인증 메일 확인 - 입력값 정상")
+    @Test
+    void checkEmailToken() throws Exception {
+        Account account = Account.builder()
+                .email("test@gmail.com")
+                .password("12345678")
+                .nickname("hello")
+                .build();
+        Account newAccount = accountRepository.save(account);
+        newAccount.generateEmailCheckToken();
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/check-email-token")
+                .param("token", newAccount.getEmailCheckToken())
+                .param("email", newAccount.getEmail()))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeDoesNotExist("error"))
+                .andExpect(model().attributeExists("nickname"))
+                .andExpect(model().attributeExists("numberOfUser"))
+                .andExpect(view().name("account/checked-email"));
+    }
+
 
     @DisplayName("회원 가입 화면에 진입하는지 테스트")
     @Test

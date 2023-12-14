@@ -18,8 +18,8 @@ public class SecurityConfig{
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests((authorizeRequests) -> {
-                    authorizeRequests.requestMatchers("/", "/login", "/sign-up", "check-email",
-                            "check-email-token", "email-login", "check-email-login", "/login-link").permitAll();
+                    authorizeRequests.requestMatchers("/", "/login", "/sign-up","/check-email-token", "/check-email"
+                            , "/email-login", "/check-email-login", "/login-link").permitAll();
                     authorizeRequests.requestMatchers(HttpMethod.GET,"/profile/*").permitAll();
                     authorizeRequests.anyRequest().authenticated();
                 })
