@@ -1,15 +1,22 @@
 package com.study.account;
 
 import com.study.domain.Account;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +28,8 @@ public class AccountService {
     private final AccountRepository accountRepository;
     private final JavaMailSender javaMailSender;
     private final PasswordEncoder passwordEncoder;
+
+    private AuthenticationManager authenticationManager;
 
     @Transactional
     public Account processNewAccount(SignUpForm signUpForm) {
@@ -50,13 +59,21 @@ public class AccountService {
         javaMailSender.send(mailMessage);
     }
 
-    public void login(Account account) {
+/*    public void login(Account account) {
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+                account.getNickname(),
+                account.getPassword(),
+                List.of(new SimpleGrantedAuthority("ROLE_USER")));
+        SecurityContextHolder.getContext().setAuthentication(token);
+    }*/
+
+    public void login(Account account, HttpServletRequest request) {
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                 account.getNickname(),
                 account.getPassword(),
                 List.of(new SimpleGrantedAuthority("ROLE_USER"))
         );
-        SecurityContext context = SecurityContextHolder.getContext();
-        context.setAuthentication(token);
+        SecurityContextHolder.getContext().setAuthentication(token);
+        request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
     }
 }

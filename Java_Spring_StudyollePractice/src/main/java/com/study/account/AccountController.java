@@ -1,6 +1,7 @@
 package com.study.account;
 
 import com.study.domain.Account;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
@@ -37,17 +38,18 @@ public class AccountController {
     }
 
     @PostMapping("/sign-up")
-    public String singUpSubmit(@Valid SignUpForm signUpForm, Errors errors) {
+    public String singUpSubmit(@Valid SignUpForm signUpForm, Errors errors, HttpServletRequest request) {
         if(errors.hasErrors()) {
             return "account/sign-up";
         }
         Account account = accountService.processNewAccount(signUpForm);
-        accountService.login(account);
+        accountService.login(account, request);
+        //accountService.login(account);
         return "redirect:/";
     }
 
     @GetMapping("/check-email-token")
-    public String checkEmailToken(String token, String email, Model model) {
+    public String checkEmailToken(String token, String email, Model model, HttpServletRequest request) {
         Account account = accountRepository.findByEmail(email);
         String view = "account/checked-email";
         if(account == null) {
@@ -60,7 +62,8 @@ public class AccountController {
         }
 
         account.completeSignUp();
-        accountService.login(account);
+        accountService.login(account, request);
+        //accountService.login(account);
         model.addAttribute("numberOfUser", accountRepository.count());
         model.addAttribute("nickname", account.getNickname());
         return view;
