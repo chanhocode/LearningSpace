@@ -25,23 +25,12 @@ public class SecurityConfig{
                 })
                 .build();
     }
-/*    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests(authorizeRequests ->
-                        authorizeRequests
-                                .mvcMatchers("/", "/login", "/sign-up", "/check-email", "/check-email-token",
-                                        "/email-login", "/check-email-login", "/login-link").permitAll()
-                                .mvcMatchers(HttpMethod.GET, "/profile/*").permitAll()
-                                .anyRequest().authenticated()
-                );
-
-        return http.build();
-    }*/
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+        return (web) -> web.ignoring()
+                .requestMatchers("/node_modules/**")
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 
 }
