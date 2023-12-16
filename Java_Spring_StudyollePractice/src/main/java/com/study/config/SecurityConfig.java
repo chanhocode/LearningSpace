@@ -23,6 +23,13 @@ public class SecurityConfig{
                     authorizeRequests.requestMatchers(HttpMethod.GET,"/profile/*").permitAll();
                     authorizeRequests.anyRequest().authenticated();
                 })
+                .formLogin((loginRequests) -> {
+                    loginRequests.loginPage("/login").permitAll();
+                })
+                .logout((logoutRequests)->{
+                    logoutRequests.logoutSuccessUrl("/");
+                })
+
                 .build();
     }
 
