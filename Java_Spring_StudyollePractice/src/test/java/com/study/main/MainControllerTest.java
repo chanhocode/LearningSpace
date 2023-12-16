@@ -43,7 +43,7 @@ class MainControllerTest {
         accountRepository.deleteAll();
     }
 
-    @DisplayName("로그인 _ 이메일 _ 테스트")
+    @DisplayName("로그인_이메일_테스트")
     @Test
     void login_with_email() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/login")
@@ -55,7 +55,7 @@ class MainControllerTest {
                 .andExpect(redirectedUrl("/"))
                 .andExpect(authenticated().withUsername("chanho"));
     }
-    @DisplayName("로그인 _ 닉네임 _ 테스트")
+    @DisplayName("로그인_닉네임_테스트")
     @Test
     void login_with_nickname() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/login")
@@ -68,7 +68,7 @@ class MainControllerTest {
                 .andExpect(authenticated().withUsername("chanho"));
     }
 
-    @DisplayName("로그인 _ 실패 _ 테스트")
+    @DisplayName("로그인_실패_테스트")
     @Test
     void login_fail() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/login")
