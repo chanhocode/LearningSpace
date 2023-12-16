@@ -1,5 +1,6 @@
 package com.study.account;
 
+import com.study.Settings.Profile;
 import com.study.domain.Account;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -91,5 +92,13 @@ public class AccountService implements UserDetailsService {
     public void completeSignUp(Account account, HttpServletRequest request) {
         account.completeSignUp();
         login(account, request);
+    }
+
+    public void updateProfile(Account account, Profile profile) {
+        account.setUrl(profile.getUrl());
+        account.setOccupation(profile.getOccupation());
+        account.setLocation(profile.getLocation());
+        account.setBio(profile.getBio());
+        accountRepository.save(account);
     }
 }
