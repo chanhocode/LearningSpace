@@ -28,7 +28,7 @@ public class SecurityConfig{
         return http
                 .authorizeHttpRequests((authorizeRequests) -> {
                     authorizeRequests.requestMatchers("/", "/login", "/sign-up","/check-email-token"
-                            , "/email-login", "/check-email-login", "/login-link").permitAll();
+                            , "/email-login", "/login-by-email").permitAll();
                     authorizeRequests.requestMatchers(HttpMethod.GET,"/profile/*").permitAll();
                     authorizeRequests.anyRequest().authenticated();
                 })

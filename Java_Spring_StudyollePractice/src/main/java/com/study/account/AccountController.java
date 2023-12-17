@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 
@@ -93,6 +94,37 @@ public class AccountController {
         model.addAttribute(byNickname);
         model.addAttribute("isOwner", byNickname.equals(account));
         return "account/profile";
+    }
+
+    @GetMapping("/email-login")
+    public String emailLoginForm() {return "account/email-login";}
+
+    @PostMapping("/email-login")
+    public String emailLogin(String email, Model model, RedirectAttributes attributes) {
+        Account account = accountRepository.findByEmail(email);
+        if(account == null) {
+            model.addAttribute("error", "유효한 이메일 주소가 아닙니다.");
+        }
+        if(!account.canSendConfirmEmail()) {
+            model.addAttribute("error", "이메일 로그인은 1시간뒤에 이용 가능합니다.");
+            return  "account/email-login";
+        }
+        accountService.sendLoginLink(account);
+        attributes.addFlashAttribute("message", "이메일 인증 메일을 전송했습니다.");
+        return "redirect:/email-login";
+    }
+
+    @GetMapping("/login-by-email")
+    public String loginByEmail(String token, String email, Model model, HttpServletRequest request) {
+        Account account = accountRepository.findByEmail(email);
+        String view = "account/logged-in-by-email";
+        if(account == null || !account.isValidToken(token)) {
+            model.addAttribute("error", "로그인할 수 없습니다.");
+            return view;
+        }
+        accountService.login(account, request);
+        return view;
+
     }
 
 }
