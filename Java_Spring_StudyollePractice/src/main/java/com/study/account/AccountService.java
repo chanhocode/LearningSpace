@@ -3,6 +3,7 @@ package com.study.account;
 import com.study.Settings.form.Notifications;
 import com.study.Settings.form.Profile;
 import com.study.domain.Account;
+import com.study.domain.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -134,5 +136,10 @@ public class AccountService implements UserDetailsService {
         mailMessage.setText("/login-by-email?token=" + account.getEmailCheckToken()
         + "&email=" + account.getEmail());
         javaMailSender.send(mailMessage);
+    }
+
+    public void addTag(Account account, Tag tag) {
+         Optional<Account> byId = accountRepository.findById(account.getId());
+         byId.ifPresent(a->a.getTags().add(tag));
     }
 }
