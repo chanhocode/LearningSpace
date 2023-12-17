@@ -36,7 +36,6 @@ public class AccountService implements UserDetailsService {
 
     private final ModelMapper modelMapper;
 
-
     private AuthenticationManager authenticationManager;
 
     public Account processNewAccount(SignUpForm signUpForm) {
