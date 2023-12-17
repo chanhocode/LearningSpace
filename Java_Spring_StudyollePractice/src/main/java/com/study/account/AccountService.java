@@ -1,7 +1,7 @@
 package com.study.account;
 
-import com.study.Settings.Notifications;
-import com.study.Settings.Profile;
+import com.study.Settings.form.Notifications;
+import com.study.Settings.form.Profile;
 import com.study.domain.Account;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -118,5 +118,11 @@ public class AccountService implements UserDetailsService {
         account.setStudyEnrollmentResultByEmail(notifications.isStudyEnrollmentResultByEmail());
         account.setStudyEnrollmentResultByWeb(notifications.isStudyEnrollmentResultByWeb());*/
         accountRepository.save(account);
+    }
+
+    public void updateNickname(Account account, String nickname, HttpServletRequest request) {
+        modelMapper.map(nickname, account);
+        accountRepository.save(account);
+        login(account, request);
     }
 }
