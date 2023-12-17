@@ -46,9 +46,9 @@ public class Account {
 
     // Alarm
     // 스터디가 만들어졌음을 이메일, 웹 으로 알림 받을 것인지
-    private boolean studyCreateByEmail;
+    private boolean studyCreatedByEmail;
 
-    private boolean studyCreateByWeb;
+    private boolean studyCreatedByWeb;
 
     // 가입 신청 결과를 이메일, 웹 으로 알림 받을 것인지
     private boolean studyEnrollmentResultByEmail;
