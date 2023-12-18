@@ -13,7 +13,7 @@ import java.io.InputStream;
 
 // 가짜 객체를 통한 콘솔에다 출력하는 메일 센더 _ 추후 업데이트를 통한 실제 센터 구현
 
-@Profile("local")
+@Profile({"local", "dev"})
 @Component
 @Slf4j
 public class ConsoleMailSender implements JavaMailSender {

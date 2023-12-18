@@ -18,19 +18,19 @@ import java.util.stream.Collectors;
 @Transactional
 @RequiredArgsConstructor
 public class ZoneService {
+
     private final ZoneRepository zoneRepository;
 
     @PostConstruct
     public void initZoneData() throws IOException {
-        if(zoneRepository.count() == 0) {
-            Resource resource = new ClassPathResource("zone_kr.csv");
+        if (zoneRepository.count() == 0) {
+            Resource resource = new ClassPathResource("zones_kr.csv");
             List<Zone> zoneList = Files.readAllLines(resource.getFile().toPath(), StandardCharsets.UTF_8).stream()
-                    .map(line->{
+                    .map(line -> {
                         String[] split = line.split(",");
                         return Zone.builder().city(split[0]).localNameOfCity(split[1]).province(split[2]).build();
                     }).collect(Collectors.toList());
             zoneRepository.saveAll(zoneList);
-
         }
     }
 
