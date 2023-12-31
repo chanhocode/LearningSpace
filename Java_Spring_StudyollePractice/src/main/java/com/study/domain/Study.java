@@ -135,4 +135,8 @@ public class Study {
             throw new RuntimeException("인원 모집을 마감할 수 없습니다.");
         }
     }
+
+    public boolean isRemovable() {
+        return !this.published;
+    }
 }
