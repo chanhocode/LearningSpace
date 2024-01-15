@@ -1,0 +1,27 @@
+@media (max-width: 768px) {
+  #container {
+    display: flex;
+    flex-direction: row;
+    aspect-ratio: 1;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+  }
+
+  #container > div {
+    height: 100vh;
+    scroll-snap-align: center;
+  }
+}
+
+@media (min-width: 769px) {
+  #container {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+  }
+
+  #container > div {
+    height: 100vh;
+    scroll-snap-align: center;
+  }
+}
