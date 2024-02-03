@@ -6,10 +6,10 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @ServletComponentScan // 서블릿 자동 등록
 @SpringBootApplication
-public class ServletExampleApplication {
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(ServletExampleApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
 }
