@@ -2,9 +2,17 @@ package com.hello.springboot.MyFirstWebApp.todo;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Size;
 
+@Entity
 public class Todo {
+
+	public Todo() {
+		super();
+	}
 
 	public Todo(int id, String username, String description, LocalDate targetDate, boolean done) {
 		super();
@@ -15,12 +23,17 @@ public class Todo {
 		this.done = done;
 	}
 
+	@Id
+	@GeneratedValue
 	private int id;
+	
 	private String username;
 	
 	@Size(min=10, message = "Enter atleast 10 characters")
 	private String description;
+	
 	private LocalDate targetDate;
+	
 	private boolean done;
 
 	public int getId() {

@@ -1,0 +1,11 @@
+INSERT INTO TODO (ID, USERNAME, DESCRIPTION, TARGET_DATE, DONE)
+ values(10001,'chanho', 'Get AWS Certified', CURRENT_DATE(), false);
+ 
+ INSERT INTO TODO (ID, USERNAME, DESCRIPTION, TARGET_DATE, DONE)
+ values(10002,'chanho', 'Get CLOUD Certified', CURRENT_DATE(), false);
+ 
+ INSERT INTO TODO (ID, USERNAME, DESCRIPTION, TARGET_DATE, DONE)
+ values(10003,'chanho', 'Get SPRING Certified', CURRENT_DATE(), false);
+ 
+ INSERT INTO TODO (ID, USERNAME, DESCRIPTION, TARGET_DATE, DONE)
+ values(10004,'chanho', 'Get Security Certified', CURRENT_DATE(), false);
