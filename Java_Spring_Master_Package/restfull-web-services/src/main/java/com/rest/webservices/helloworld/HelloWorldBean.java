@@ -1,6 +1,5 @@
 package com.rest.webservices.helloworld;
 
-
 public class HelloWorldBean {
 	private String message;
 	public HelloWorldBean(String message) {
@@ -18,4 +17,6 @@ public class HelloWorldBean {
 	public String toString() {
 		return "HelloWorldBeen [message=" + message + "]";
 	}
+	
+
 }
