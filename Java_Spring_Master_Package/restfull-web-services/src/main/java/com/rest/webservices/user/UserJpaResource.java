@@ -5,6 +5,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
@@ -41,12 +42,12 @@ public class UserJpaResource {
 	
 	@GetMapping("/jpa/users/{userId}")
 	public EntityModel<User> retrieveUser(@PathVariable Integer userId) {
-		User user = service.findOne(userId);
-		if (user== null) {
+		Optional<User> user = repository.findById(userId);
+		if (user.isEmpty()) {
 			throw new UserNotFoundException("id: " + userId);
 		}
 		
-		EntityModel<User> entityModel = EntityModel.of(user);
+		EntityModel<User> entityModel = EntityModel.of(user.get());
 		WebMvcLinkBuilder link = linkTo(methodOn(this.getClass()).retrieveAllUsers());
 		entityModel.add(link.withRel("all-users"));
 		
@@ -55,7 +56,7 @@ public class UserJpaResource {
 	
 	@PostMapping("/jpa/users")
 	public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
-		User savedUser = service.save(user);
+		User savedUser = repository.save(user);
 		
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId()).toUri();
 		return ResponseEntity.created(location).build();
@@ -63,7 +64,19 @@ public class UserJpaResource {
 	
 	@DeleteMapping("/jpa/users/{userId}")
 	public void deleteUser(@PathVariable Integer userId) {
-		service.deleteById(userId);
+		repository.deleteById(userId);
+	}
+	
+	
+	
+	@GetMapping("/jpa/users/{userId}/posts")
+	public List<Post> retrievePostsForUser(@PathVariable Integer userId) {
+		Optional<User> user = repository.findById(userId);
+		if (user.isEmpty()) {
+			throw new UserNotFoundException("id: " + userId);
+		}
+		
+		return user.get().getPosts();
 	}
 	
 }
